@@ -1,0 +1,80 @@
+a{
+    color: yellowgreen;
+}
+
+a:hover{
+    font-size: 27px;
+    color: white;
+}
+
+.wrapper > *{
+    left: 10%;
+    display: inline;
+    margin: 10px 0px 10px 0px;
+    position: relative;
+}
+
+.wrapper > p{
+    color: white;
+}
+
+.body_afterstart{
+    background: url("../img/background.jpg") center black;
+    background-repeat: no-repeat;
+    background-position: -20%;
+    background-attachment: fixed;
+    background-size: cover;
+    z-index: -2;
+}
+
+#password{
+    margin-left: 5px;
+}
+
+#box_wrapper{
+    width: 700px;
+    display: flex;
+    justify-content: center;
+    height: 400px;
+    z-index: 10;
+}
+
+#img_wrapper{
+    width: 100px;
+    height: 100px;
+    background: url("../img/oldsnake.jpg");
+    position: relative;
+    left: 35%;
+}
+
+#login_button{
+    width: 100px;
+    height: 50px;
+    padding: 5px 5px 5px 5px; 
+    margin-top: 10px;
+    left: 40%;
+    position: relative;
+}
+
+#box_content{
+    padding: 20px;
+    left: 5%;
+    width: 400px;
+    height: 350px;
+    position: relative;
+}
+
+#box_content > *{
+    margin: 20px;
+}
+
+#box_registration{
+    width: 500px;
+    height: 400px;
+    left: 40px;
+    padding: 10px 20px 10px 25px;
+    border-radius: 15%;
+    border: 8px solid red;
+    box-shadow: 10px 10px 10px 10px black;
+    background-color: black;
+}

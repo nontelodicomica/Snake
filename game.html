@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./img/welcomeicon.ico">
+    <link rel="stylesheet" href="./css/game.css" media="screen" type="text/css">
+    <script type="text/javascript" src="./js/intervals.js"></script>
+    <script type="text/javascript" src="./js/snakeelement.js"></script>
+    <script type="text/javascript" src="./js/snake.js"></script>
+    <script type="text/javascript" src="./js/otherelements.js"></script>
+    <script type="text/javascript" src="./js/game.js"></script>
+    <script type="text/javascript" src="./js/start.js"></script>
+    <title>Welcome to Snake</title>
+</head>
+<body onload="begin()">
+        <div id="scores" class="nocursor">
+            <div id="boxcurrentscore" class="boxscore">
+                <h2>Score: </h2>
+                <input id="currentscore" type="text" readonl />
+            </div>
+            <div id="boxbestscore" class="boxscore">
+                <div id="title">
+                    <h2>Best</h2>
+                    <h2>score: </h2>
+                </div>
+                <input id="bestscore" type="text" readonly/>
+            </div>
+        </div>
+        <div id="content">
+            <div id="backgroundgame" class="noborder,withpointer"></div>
+        </div>
+        <div id="boxchangecolour" class="withpointer">
+            <h2>Change color: </h2>
+            <div id="colourchoices">
+                <div id="yellow" class="boxselectioncolour"></div>
+                <div id="orange" class="boxselectioncolour"></div>
+                <div id="black" class="boxselectioncolour"></div>
+                <div id="purple" class="boxselectioncolour"></div>
+                <div id="blue" class="boxselectioncolour"></div>
+            </div>
+        </div>
+</body>
+</html>

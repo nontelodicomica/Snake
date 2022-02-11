@@ -1,0 +1,40 @@
+#producer_attribute{
+    font-size: small;
+    font-weight: bold;
+    position: relative;
+    left: 0px;
+    margin-top: 6px;
+    float: bottom right;
+}
+
+.body_beforestart{
+    background: fixed white;
+}
+
+.logo_content{
+    top: 50%;
+    transform: translate(-50px, -50px);
+    left: 50%;
+    width: 300px;
+    height: 200px;
+    position: fixed;
+}
+
+.logo{
+    width: 100px;
+    height: 100px;
+    background-image: url("../img/intro.png");
+    animation: fadein 1.5s ease-out forwards, skew 1s ease-out 1.8s forwards;
+    margin-bottom: 20px;
+}
+
+@keyframes skew {
+    from {transform: skewY(0deg);}
+    to {transform: skewY(20deg);}
+}
+
+@keyframes fadein {
+    from {opacity: 0; width: 0px; height: 0px;}
+    to {opacity: 1; width: 100px; height: 100px;}
+}
+
