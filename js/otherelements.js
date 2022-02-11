@@ -1,22 +1,33 @@
 class OtherElements {
-    constructor(id, pos) {
+    constructor(id) {
         this.id = id;
-        this.position = pos;
-        this.timeout = Math.floor(Math.random()*100)*200;
-        this.timer = 
+        this.timeout = this.generateTimeoutValue();
+        this.timer = null;
         this.type = (Math.random() <= 0.5)? 0 : 1;
     }
 
+    generateTimeoutValue(){
+        let newtimeout = Math.floor(Math.random()*100)*200;
+        if(newtimeout < 500)
+            return 2000;
+        else
+            return newtimeout;
+    }
+
     deleteElem(){
+        this.deleteTimeoutExplosion();
         if(this.type == 1){
             document.getElementById(this.id).style.backgroundImage = "url(\"./img/explosion.png\")";
             setTimeout(this.deleteElemFromGame.bind(this),100);
         }else
-            document.getElementById(this.id).style.backgroundImage = "";
-            clearTimeout(this.timer);
-            this.timer = null;
-        }
+            this.deleteElemFromGame();
+    }
     
+    deleteTimeoutExplosion(){
+        clearTimeout(this.timer);
+            this.timer = null;
+    }
+
     deleteElemFromGame(){
         document.getElementById(this.id).style.backgroundImage = "";
     }

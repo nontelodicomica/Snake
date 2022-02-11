@@ -10,4 +10,3 @@ class Timing {
         this.int = null;
     }
 }
-

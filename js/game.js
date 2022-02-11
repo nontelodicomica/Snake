@@ -43,7 +43,7 @@ class Game {
 
         this.intervals.push(new Timing(this.intervals.length, setInterval(this.movesnake.bind(this), 100), 100));
         this.intervals.push(new Timing(this.intervals.length, setInterval(this.addborder.bind(this), 6000), 6000));
-        this.intervals.push(new Timing(this.intervals.length, setInterval(this.addFoodOrBomb.bind(this), 2000), 2000));
+        this.intervals.push(new Timing(this.intervals.length, setInterval(this.addFoodOrBomb.bind(this), 2000), 3000));
     }
 
     movesnake(){
@@ -80,6 +80,7 @@ class Game {
             this.intervals[0].value = 60;
             this.intervals[0].int = setInterval(this.movesnake.bind(this), this.intervals[0].value);
         }
+
         this.checkifeat();
     }
 
@@ -122,30 +123,40 @@ class Game {
     }
 
     deleteFromPlayground(newelem){
-        newelem.deleteElem();
-        setTimeout(this.otherelem.splice(),100, newelem.position, 1);
-        console.log(this.otherelem);
+        let index = this.otherelem.indexOf(newelem);
+        if(!this.eatOrExplode(newelem))
+            newelem.deleteElem();
+        
+        this.otherelem.splice(index, 1);
+    }
+
+    eatOrExplode(i){
+    if(i.id == this.snake.giveHead().id){
+        if (i.type == 0) {
+            this.snake.addSnakeElement(this.snake.generateNewIdForInsert(), this.snake.giveLength());
+            this.snake.giveTail().sign = this.sign;
+            this.snake.giveTail().inc = this.inc;
+            i.deleteElem();
+            this.snake.drawSnake();
+            return true;
+        }else{
+            document.getElementById(i.id).style.backgroundImage = "url(\"./img/explosion.png\")";
+            i.deleteTimeoutExplosion();
+            setTimeout(this.snake.drawSnake.bind(this.snake),800);
+            let lastelem = this.snake.giveTail();
+            document.getElementById(lastelem.id).style.backgroundImage = "";
+            this.snake.body.pop();
+            return true;
+            }
+        }else
+            return false;
     }
 
     checkifeat() {
         for (let i of this.otherelem) {
-            if (i.id == this.snake.giveHead().id) {
-                if (i.type == 0) {
-                    this.snake.addSnakeElement(this.snake.generateNewIdForInsert(), this.snake.giveLength());
-                    this.snake.giveTail().sign = this.sign;
-                    this.snake.giveTail().inc = this.inc;
-                    this.snake.drawSnake();
-                    console.log(this.snake);
-                }else{
-                    document.getElementById(i.id).style.backgroundImage = "url(\"./img/explosion.png\")";
-                    setTimeout(this.snake.drawSnake.bind(this.snake),800);
-                    let lastelem = this.snake.giveTail();
-                    document.getElementById(lastelem.id).style.backgroundImage = "";
-                    this.snake.body.pop();
-                    console.log(this.snake);
-                }
+                if(this.eatOrExplode(i)){
+                    this.otherelem.splice(this.otherelem.indexOf(i), 1);
 
-                this.otherelem.splice(i.position, 1);
                 if (this.snake.giveLength() == 0) {
                     console.log("Hai perso");
                     this.endgame();
@@ -164,11 +175,10 @@ class Game {
             clearTimeout(i);
 
         this.timeout = null;
-
+        console.log(this.otherelem);
         document.removeEventListener("keydown", this.event[0]);
         document.removeEventListener("keydown", this.event[1]);
         this.event = null;
-        return;
     }
 
     changedirection(event) {
