@@ -24,8 +24,8 @@ class Snake {
         return this.giveElem(0);
     }
 
-    addSnakeElement(id) {
-        this.body.push(new Snake_Element(id));
+    addSnakeElement(id, position) {
+        this.body.push(new Snake_Element(id, position));
     }
 
     incSpeed() {
@@ -41,15 +41,11 @@ class Snake {
         let image, rotation;
 
         for (let i of this.body) {
-            let current = this.body.indexOf(i);
-            let previous = this.body.find(j => this.body.indexOf(j) == current-1);
+            let previous = this.body[i.position - 1];
 
-            /*console.log(current);
-            console.log(previous);*/
-            
-            if (current == 0)
+            if (i.position == 0)
                 image = "head";
-            else if (current == this.body.length - 1)
+            else if (i.position == this.body.length - 1)
                 image = "tail";
             else{
                 if(i.inc != previous.inc)
@@ -58,7 +54,7 @@ class Snake {
                     image = "body";
             }
 
-            if (current > 0 && i.inc != previous.inc)
+            if (i.position > 0 && i.inc != previous.inc)
                 rotation = i.changerotation(previous, this.giveLength());
             else
                 rotation = i.checkstartrotation();

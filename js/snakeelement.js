@@ -74,40 +74,20 @@ class Snake_Element {
                                 return "";
                         }
                     }
-}
+    }
 
-    checkIfTouchBorder() {
+    checkIfTouchBorder(next) {
         if (this.inc == 1) {
-            if (((this.id + 1) % 31 == 0) || this.id % 31 == 0)
-                return true;
+            if (((this.id + 1) % 31 == 0) || this.id % 31 == 0){
+                if(next.id != this.id + 1 || next.id != this.id - 1)
+                    return true;
+            }
         } else {
-            if (this.id + this.inc > 960 || this.id - this.inc < 0)
+            if (this.id + this.inc > 960 || this.id - this.inc < 0){
+                if(next.id != this.id + 31 || next.id == this.id - 31)
                 return true;
         }
-        return false;
     }
+        return false;
 }
-
-
-/* if (previous.sign == 0 && this.sign == 1){
-                    if (this.position < snakelength - 1 || previous.inc == 1) 
-                        return "rotate90";
-                    else if(this.inc == 1)
-                        return ""
-                    else
-                        return "rotate180";
-                }
-                else if (previous.sign == 1 && this.sign == 0){
-                    if(previous.inc == 1 && this.inc == 31){
-                        if(this.sign == 1)
-                            return "";
-                        else
-                            return "rotate270";
-                    }
-                    else if(this.inc == 31)
-                        return "rotate270";
-                }
-            }
-*/
-
-
+}

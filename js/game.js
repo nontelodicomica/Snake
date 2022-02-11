@@ -43,7 +43,7 @@ class Game {
 
         this.intervals.push(new Timing(this.intervals.length, setInterval(this.movesnake.bind(this), 100), 100));
         this.intervals.push(new Timing(this.intervals.length, setInterval(this.addborder.bind(this), 6000), 6000));
-        this.intervals.push(new Timing(this.intervals.length, setInterval(this.addFoodOrBomb.bind(this), 2000), 3000));
+        this.intervals.push(new Timing(this.intervals.length, setInterval(this.addFoodOrBomb.bind(this), 2000), 2000));
     }
 
     movesnake(){
@@ -80,7 +80,6 @@ class Game {
             this.intervals[0].value = 60;
             this.intervals[0].int = setInterval(this.movesnake.bind(this), this.intervals[0].value);
         }
-
         this.checkifeat();
     }
 
@@ -156,7 +155,6 @@ class Game {
         for (let i of this.otherelem) {
                 if(this.eatOrExplode(i)){
                     this.otherelem.splice(this.otherelem.indexOf(i), 1);
-
                 if (this.snake.giveLength() == 0) {
                     console.log("Hai perso");
                     this.endgame();
@@ -175,7 +173,6 @@ class Game {
             clearTimeout(i);
 
         this.timeout = null;
-        console.log(this.otherelem);
         document.removeEventListener("keydown", this.event[0]);
         document.removeEventListener("keydown", this.event[1]);
         this.event = null;
@@ -219,7 +216,8 @@ class Game {
 
     checkifloose() {
         for (let i of this.snake.body) {
-            if (i.checkIfTouchBorder()) {
+            let next = this.snake.body.indexOf(i)+1;
+            if (i.checkIfTouchBorder(next)) {
                 this.endgame();
                 return true;
             }
