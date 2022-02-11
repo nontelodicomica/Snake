@@ -75,19 +75,4 @@ class Snake_Element {
                         }
                     }
     }
-
-    checkIfTouchBorder(next) {
-        if (this.inc == 1) {
-            if (((this.id + 1) % 31 == 0) || this.id % 31 == 0){
-                if(next.id != this.id + 1 || next.id != this.id - 1)
-                    return true;
-            }
-        } else {
-            if (this.id + this.inc > 960 || this.id - this.inc < 0){
-                if(next.id != this.id + 31 || next.id == this.id - 31)
-                return true;
-        }
-    }
-        return false;
-}
 }

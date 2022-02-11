@@ -215,12 +215,9 @@ class Game {
     }
 
     checkifloose() {
-        for (let i of this.snake.body) {
-            let next = this.snake.body.indexOf(i)+1;
-            if (i.checkIfTouchBorder(next)) {
-                this.endgame();
-                return true;
-            }
+        if (this.checkIfTouchBorder()) {
+            this.endgame();
+            return true;
         }
     }
 
@@ -242,4 +239,21 @@ class Game {
         this.snake.colour = event.target.id;
     }
 
+    checkIfTouchBorder() {
+        for(let i of this.snake.body){
+            let indexnext = this.snake.body.indexOf(i) + 1;
+            let next = this.snake.body[indexnext];
+    
+            if(i.inc == 1 && this.snake.body.indexOf(i) < this.snake.giveLength()-1) {
+                if ((i.id + 1) % 31 == 0 && next.id % 31 == 0 || 
+                    (next.id + 1) % 31 == 0 && i.id % 31 == 0)
+                        return true;
+            }else if(i.inc == 31 && this.snake.body.indexOf(i) < this.snake.giveLength()-1){
+                if (i.id + i.inc > 960 && next.id - next.inc < 0 ||
+                    next.id + next.inc > 960 && i.id - i.inc < 0)
+                        return true;
+                }
+            }
+            return false;
+        }
 }

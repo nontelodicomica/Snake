@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="./img/welcomeicon.ico">
     <link rel="stylesheet" href="./css/game.css" media="screen" type="text/css">
+    <link rel="stylesheet" href="./css/boxesgame.css" media="screen" type="text/css">
+    <link rel="stylesheet" href="./css/default.css" media="screen" type="text/css">
     <script type="text/javascript" src="./js/intervals.js"></script>
     <script type="text/javascript" src="./js/snakeelement.js"></script>
     <script type="text/javascript" src="./js/snake.js"></script>
@@ -17,7 +19,7 @@
         <div id="scores" class="nocursor">
             <div id="boxcurrentscore" class="boxscore">
                 <h2>Score: </h2>
-                <input id="currentscore" type="text" readonl />
+                <input id="currentscore" type="text" placeholder="0" readonly/>
             </div>
             <div id="boxbestscore" class="boxscore">
                 <div id="title">
@@ -28,9 +30,9 @@
             </div>
         </div>
         <div id="content">
-            <div id="backgroundgame" class="noborder,withpointer"></div>
+            <div id="backgroundgame" class="noborder,withcursor"></div>
         </div>
-        <div id="boxchangecolour" class="withpointer">
+        <div id="boxchangecolour" class="withcursor">
             <h2>Change color: </h2>
             <div id="colourchoices">
                 <div id="yellow" class="boxselectioncolour"></div>
