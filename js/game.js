@@ -1,4 +1,4 @@
-class Game {
+class Game{
     constructor() {
         this.event = new Array();
         this.timeout = new Array();
@@ -17,6 +17,20 @@ class Game {
             div.setAttribute("id", i);
             background.appendChild(div);
             div.addEventListener("click", this.event[0]);
+        }
+    }
+
+    buildimages() {
+        let colourchoices = document.getElementById("colourchoices");
+        let colours = colourchoices.getElementsByTagName("div");
+        for (let i = 0; i < colours.length; i++) {
+            let boximage = document.getElementById(colours[i].id);
+            let img = document.createElement("img");
+            img.src = "./img/Graphics/Choices/" + boximage.id + ".png";
+            img.id = boximage.id;
+            boximage.id = boximage.id+"box";
+            boximage.appendChild(img);
+            img.addEventListener("click", this.changesnakecolour.bind(this));
         }
     }
 
@@ -130,6 +144,8 @@ class Game {
     }
 
     eatOrExplode(i){
+        let score = document.getElementById("currentscore");
+
     if(i.id == this.snake.giveHead().id){
         if (i.type == 0) {
             this.snake.addSnakeElement(this.snake.generateNewIdForInsert(), this.snake.giveLength());
@@ -137,6 +153,7 @@ class Game {
             this.snake.giveTail().inc = this.inc;
             i.deleteElem();
             this.snake.drawSnake();
+            score.value++;
             return true;
         }else{
             document.getElementById(i.id).style.backgroundImage = "url(\"./img/explosion.png\")";
@@ -145,6 +162,7 @@ class Game {
             let lastelem = this.snake.giveTail();
             document.getElementById(lastelem.id).style.backgroundImage = "";
             this.snake.body.pop();
+            score.value--;
             return true;
             }
         }else
@@ -218,20 +236,6 @@ class Game {
         if (this.checkIfTouchBorder()) {
             this.endgame();
             return true;
-        }
-    }
-
-    buildimages() {
-        let colourchoices = document.getElementById("colourchoices");
-        let colours = colourchoices.getElementsByTagName("div");
-        for (let i = 0; i < colours.length; i++) {
-            let boximage = document.getElementById(colours[i].id);
-            let img = document.createElement("img");
-            img.src = "./img/Graphics/Choices/" + boximage.id + ".png";
-            img.id = boximage.id;
-            boximage.id = boximage.id+"box";
-            boximage.appendChild(img);
-            img.addEventListener("click", this.changesnakecolour.bind(this));
         }
     }
 

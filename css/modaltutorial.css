@@ -1,0 +1,61 @@
+.modal{
+    width: 500px;
+    height: 400px;
+    background-color:antiquewhite;
+    border-radius: 15px;
+    z-index: 1;
+    cursor: pointer;
+    position: fixed;
+}
+
+.button{
+    width: 60px;
+    z-index: 5;
+    height: 60px;
+    float: inline-end;
+    margin: 1px;
+    position: absolute;
+}
+
+#exitbutton{
+    left: 430px;
+}
+
+#next{
+    top: 80%;
+    left: 83%;
+}
+
+#previous{
+    top: 80%;
+    left: 6%;
+}
+
+#contentmodal{
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    height: 250px;
+    width: 400px;
+    padding: 0px 20px 20px 50px;
+    position: fixed;
+}
+
+#contentpopup > * {
+    display: inline;
+    margin: 2px;
+}
+
+.darkmode{
+    width: 100%;
+    height: 100%;
+    top: -8px;
+    left: -8px;
+    opacity: 0.5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    z-index: 0;
+    background-color: black;
+}
