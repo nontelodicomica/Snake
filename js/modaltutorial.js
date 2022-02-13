@@ -10,8 +10,8 @@ class ModalTutorial{
         document.body.appendChild(backgroundmodal);
 
         let modal = document.createElement("div");
-            modal.className = "modal";
             modal.setAttribute("id","modal");
+            modal.className = "modal";
         document.body.appendChild(modal);
         for(let i = 0; i < 2; i++)
             this.createButtons(i);

@@ -1,24 +1,44 @@
+#backgroundmodal{
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  min-width: 100vw;
+  position: fixed;
+}
+
 .modal{
-    width: 500px;
-    height: 400px;
+    width: 467px;
+    height: 338px;
     background-color:antiquewhite;
     border-radius: 15px;
-    z-index: 1;
+    z-index: 2;
     cursor: pointer;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     position: fixed;
 }
 
+h2,h3{
+    font-size: 90%;
+}
+
 .button{
-    width: 60px;
+    width: 14%; 
+    height: 14%;
     z-index: 5;
-    height: 60px;
-    float: inline-end;
+    height: 14%;
     margin: 1px;
+    padding: 1px;
     position: absolute;
+    background-repeat: no-repeat;
 }
 
 #exitbutton{
-    left: 430px;
+    left: 85%;
 }
 
 #next{
@@ -28,34 +48,53 @@
 
 #previous{
     top: 80%;
-    left: 6%;
+    left: 5%;
 }
 
 #contentmodal{
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    height: 250px;
-    width: 400px;
+    left: 10%;
+    top: 1%;
+    height: 200px;
+    width: 300px;
     padding: 0px 20px 20px 50px;
-    position: fixed;
-}
-
-#contentpopup > * {
-    display: inline;
-    margin: 2px;
+    position: relative;
 }
 
 .darkmode{
-    width: 100%;
-    height: 100%;
-    top: -8px;
-    left: -8px;
     opacity: 0.5;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    z-index: 0;
+    z-index: 1;
     background-color: black;
 }
+
+@media only screen and (max-width: 670px) and (max-height: 540px){
+  .modal {height: 60%; width: 70%;}
+  #contentmodal {width: 50%; height: 70%;}
+  .button{width: 8%; height: 10%; background-size: cover;}
+  #contentmodal img {height: 50%; width: 50%;}
+  #exitbutton {left: 85%;}
+  #contentmodal h3,h2 {font-size: 80%;}
+  #next {left: 85%; top: 80%;}
+  #previous {left: 8%; top: 80%;}
+}
+
+  @media only screen and (min-height: 500px) and (max-width:800px){
+    body{flex-direction: column;}
+    #backgroundgame{top: 20%; height: 60%; width: 70%; left: 49%;}
+    #colorchoices {flex-direction: row;}
+    #boxchangecolor {top: 80vh; left: 50%; transform: translateX(-50%);}
+    #scores {flex-direction: row; left: 50%; top: 1%; transform: translateX(-50%); width: 60%; height: 17%;}
+    #scores input{height: 30%; width: 20%;}
+  }
+
+  @media only screen and (min-width: 500px) and (max-height:500px) {
+    body{flex-direction: row;}
+    #backgroundgame{height: 90%; width: 50%; left: 55%; top: 1%;}
+    #scores {flex-direction: column; left: 50%; }
+    #colorchoices {top: 80vh;height: 70%;}
+    #boxchangecolor {height: 70%;}
+    #scores{left: 5%;}
+  }
+
+  [class*="col-"] {
+    width: 100%;
+  }

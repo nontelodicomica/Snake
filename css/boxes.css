@@ -1,0 +1,77 @@
+.boxscore{
+    margin: 2px 10px 30px 0px;
+    padding: 10px;
+    background-color: black;
+    border-radius: 15px;
+    width: 130px;
+    max-width: 100%;
+}
+
+.boxscore > *{
+    display: inline-block;
+    position: relative;
+}
+
+.boxscore h2{
+    color: white;
+}
+
+.boxscore input{
+    height: 30px;
+    width: 30%;
+    text-align: right;
+    font-size: 110%;
+    left: 15%;
+    font-weight: bold;
+}
+
+.boxselectioncolor{
+    width: 60px;
+    height: 60px;
+    border: solid 1px black;
+    margin-bottom: 30px;
+    background-color: coral;
+}
+
+.boxselectioncolor img{
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    height: 40px;
+    width: 40px;
+    padding: 5px;
+    position: relative;
+    background-color:bisque;
+}
+
+#scores, #boxchangecolor{
+    top: 1vh;
+    width: 20vw;
+    position: fixed;
+}
+
+#boxchangecolor{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    left: 85%;
+}
+
+#boxchangecolor h2{
+    margin: 6px;
+}
+
+#scores{
+    display: flex;
+    flex-direction: column;
+    left: 3vw;
+}
+
+#colorchoices{
+    display: flex;
+    flex-direction: column;
+}
+
+#colorchoices > *{
+    margin: 1%;
+}

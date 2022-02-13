@@ -11,7 +11,7 @@ class Game{
 
     createbackgroundGame() {
         this.event.push(this.buildSnake.bind(this));
-        var background = document.getElementById("backgroundgame");
+        let background = document.getElementById("backgroundgame");
         for (var i = 0; i < 961; i++) {
             var div = document.createElement("div");
             div.setAttribute("id", i);
@@ -21,16 +21,16 @@ class Game{
     }
 
     buildimages() {
-        let colourchoices = document.getElementById("colourchoices");
-        let colours = colourchoices.getElementsByTagName("div");
-        for (let i = 0; i < colours.length; i++) {
-            let boximage = document.getElementById(colours[i].id);
+        let colorchoices = document.getElementById("colorchoices");
+        let colors = colorchoices.getElementsByTagName("div");
+        for (let i = 0; i < colors.length; i++) {
+            let boximage = document.getElementById(colors[i].id);
             let img = document.createElement("img");
             img.src = "./img/Graphics/Choices/" + boximage.id + ".png";
             img.id = boximage.id;
             boximage.id = boximage.id+"box";
             boximage.appendChild(img);
-            img.addEventListener("click", this.changesnakecolour.bind(this));
+            img.addEventListener("click", this.changesnakecolor.bind(this));
         }
     }
 
@@ -239,8 +239,8 @@ class Game{
         }
     }
 
-    changesnakecolour(event) {
-        this.snake.colour = event.target.id;
+    changesnakecolor(event) {
+        this.snake.color = event.target.id;
     }
 
     checkIfTouchBorder() {
