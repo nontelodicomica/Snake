@@ -3,26 +3,12 @@ class ModalTutorial{
         this.indexscorrimento = 0;
     }
 
-    createModal(){
-        let backgroundmodal = document.createElement("div");
-        backgroundmodal.setAttribute("class","darkmode");
-        backgroundmodal.setAttribute("id","backgroundmodal");
-        document.body.appendChild(backgroundmodal);
-
-        let modal = document.createElement("div");
-            modal.setAttribute("id","modal");
-            modal.className = "modal";
-        document.body.appendChild(modal);
+    populateModal(){
+        document.getElementById("backgroundmodal").hidden = false;
+        document.getElementById("modal").hidden = false;
         for(let i = 0; i < 2; i++)
             this.createButtons(i);
-        modal.appendChild(this.createSpaceForContent());
         this.createModalContent();
-    }
-
-    createSpaceForContent(){
-        let content = document.createElement("div");
-            content.setAttribute("id","contentmodal");
-        return content;
     }
 
     createButtons(i){
@@ -43,7 +29,7 @@ class ModalTutorial{
                 }
             j.style.backgroundImage = "url(\"./img/buttons/"+image+".png\")";
             j.className = "button";
-            document.getElementById("modal").appendChild(j);
+            document.getElementById("buttonspace").appendChild(j);
     }
 
     startgame(){
@@ -52,12 +38,12 @@ class ModalTutorial{
     }
 
     createModalContent(){
-        var img = document.createElement("img");
+        let img = document.createElement("img");
         if(this.indexscorrimento < 6){
             img.src = "./img/Tutorial/"+this.indexscorrimento+".png";
-            document.getElementById("contentmodal").appendChild(img);
+            document.getElementById("description").appendChild(img);
         }
-        document.getElementById("contentmodal").appendChild(this.chooseRightDescription());
+        document.getElementById("description").appendChild(this.chooseRightDescription());
         return;
         }
 
@@ -67,7 +53,7 @@ class ModalTutorial{
         switch(this.indexscorrimento){
             case 0: let welcome = document.createElement("h2");
                     welcome.innerText = "Benvenuto!";
-                    document.getElementById("contentmodal").appendChild(welcome);
+                    document.getElementById("description").appendChild(welcome);
                     text.innerText = "Clicca sul campo da gioco per iniziare";
                     break;
             case 1: text.innerText = "Per cambiare la direzione del serpente è sufficiente premere le frecce della tastiera! ";
@@ -87,7 +73,7 @@ class ModalTutorial{
                     text.innerText += "per un breve lasso di tempo premendo il tasto SPACE.";
                     let endpresentation = document.createElement("h2");
                     endpresentation.innerText = "Buon divertimento!";
-                    document.getElementById("contentmodal").appendChild(endpresentation);
+                    document.getElementById("description").appendChild(endpresentation);
                     break;
             }
             return text;
@@ -95,25 +81,23 @@ class ModalTutorial{
 
     nextModal(){
             this.indexscorrimento++;
-            document.getElementById("contentmodal").innerHTML = "";
+            document.getElementById("description").innerHTML = "";
             if(this.indexscorrimento == 1 && document.getElementById("previous") == undefined)
                 this.createButtons(2);
+            if(this.indexscorrimento == 6)
+                document.getElementById("buttonspace").removeChild(next);
+        
             this.createModalContent();
-            if(this.indexscorrimento == 6){
-                document.getElementById("modal").removeChild(next);
-                return;
-            }
         }
 
     previousmodal(){
             this.indexscorrimento--;
-            document.getElementById("contentmodal").innerHTML = "";
+            document.getElementById("description").innerHTML = "";
             if(this.indexscorrimento == 5 && document.getElementById("next") == undefined)
                 this.createButtons(1);
-            this.createModalContent();
-            if(this.indexscorrimento == 0){
-                document.getElementById("modal").removeChild(previous);
-                return;
-            }
+            if(this.indexscorrimento == 0)
+                document.getElementById("buttonspace").removeChild(previous);
+            
+        this.createModalContent();
     }
 }
