@@ -7,10 +7,6 @@
     float: bottom right;
 }
 
-.body_beforestart{
-    background: fixed white;
-}
-
 .logo_content{
     top: 50%;
     transform: translate(-50px, -50px);
