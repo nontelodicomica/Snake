@@ -1,7 +1,6 @@
 var starselected;
 
 function blurstars(event){
-    console.log('ok');
     let selected = event.target.id;
     for(let i = 1; i < 6; i++){
         if(i <= selected)

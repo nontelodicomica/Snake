@@ -5,11 +5,11 @@ function begin(){
 
 <?php
     session_start();
-    header("Content-Type: application/javascript");
+    header('Content-Type: application/javascript');
 
     if($_SESSION['firsttime'] == true){
 ?>
         let tutorial = new ModalTutorial();
         tutorial.populateModal();
-    <?php } ?>
+    <?php $_SESSION['firsttime'] = false; } ?>
 }

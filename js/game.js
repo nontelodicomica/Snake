@@ -144,40 +144,46 @@ class Game{
     }
 
     eatOrExplode(i){
-        let score = document.getElementById("currentscore");
+        if(i.id == this.snake.giveHead().id){
+            let score = document.getElementById("currentscore");
+            if (i.type == 0) {
+                this.snake.addSnakeElement(this.snake.generateNewIdForInsert(), this.snake.giveLength());
+                this.snake.giveTail().sign = this.sign;
+                this.snake.giveTail().inc = this.inc;
+                i.deleteElem();
+                this.snake.drawSnake();
 
-    if(i.id == this.snake.giveHead().id){
-        if (i.type == 0) {
-            this.snake.addSnakeElement(this.snake.generateNewIdForInsert(), this.snake.giveLength());
-            this.snake.giveTail().sign = this.sign;
-            this.snake.giveTail().inc = this.inc;
-            i.deleteElem();
-            this.snake.drawSnake();
-            score.value++;
-            return true;
-        }else{
-            document.getElementById(i.id).style.backgroundImage = "url(\"./img/explosion.png\")";
-            i.deleteTimeoutExplosion();
-            setTimeout(this.snake.drawSnake.bind(this.snake),800);
-            let lastelem = this.snake.giveTail();
-            document.getElementById(lastelem.id).style.backgroundImage = "";
-            this.snake.body.pop();
-            score.value--;
-            return true;
+                if(score !== null)
+                    score.value++;
+                
+                return true;
+            }else{
+                document.getElementById(i.id).style.backgroundImage = "url(\"./img/explosion.png\")";
+                i.deleteTimeoutExplosion();
+                setTimeout(this.snake.drawSnake.bind(this.snake),800);
+                let lastelem = this.snake.giveTail();
+                document.getElementById(lastelem.id).style.backgroundImage = "";
+                this.snake.body.pop();
+
+                if(score !== null)
+                    score.value--;
+
+                return true;
             }
-        }else
+        }
+        else
             return false;
     }
 
     checkifeat() {
         for (let i of this.otherelem) {
+            if (this.snake.giveLength() == 2) {
+                console.log("Hai perso");
+                this.endgame();
+                return;
+            }
                 if(this.eatOrExplode(i)){
                     this.otherelem.splice(this.otherelem.indexOf(i), 1);
-                if (this.snake.giveLength() == 1) {
-                    console.log("Hai perso");
-                    this.endgame();
-                    return;
-                }
             }
         }
     }

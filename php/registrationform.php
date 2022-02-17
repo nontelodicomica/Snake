@@ -1,7 +1,7 @@
 <html>
     <head>
-        <link rel="stylesheet" href="../css/default.css" media="screen" type="text/css">
-        <link rel="stylesheet" href="../css/defaultform.css" media="screen" type="text/css">
+        <link rel='stylesheet' href='../css/default.css' media='screen' type='text/css'>
+        <link rel='stylesheet' href='../css/defaultform.css' media='screen' type='text/css'>
     </head>
 <?php 
     session_start();
@@ -26,7 +26,7 @@
     }
 ?>
 
-<body class="body_afterstart">
+<body class='body_afterstart'>
     <?php
         createBody('registration');
         if($_SESSION['loggedin'] == true){

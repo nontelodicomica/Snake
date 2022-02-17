@@ -10,7 +10,7 @@ function checkEmail($type){
     if(checkIfEmpty('email'))
         return '';
     else if(!filter_var($_POST['email'],FILTER_VALIDATE_EMAIL)){
-        $str_error.= "Email del formato non valido;";  
+        $str_error.= 'Email del formato non valido;';  
         return '';
     }else if($check == false && $type == 'registration')
         return '';
@@ -40,18 +40,18 @@ function checkIfIsTheSame($cod, $type){
     return true;
 }
 
-function checkPassword(){
+function checkPassword($attribute){
     global $str_error;
 
-    if(checkIfEmpty('password'))
+    if(checkIfEmpty($attribute))
         return '';
 
     $pattern = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{5,}$/';
-    if(!preg_match($pattern,$_POST['password'])){
-        $str_error.= 'Password nel formato non valido: deve contenere almeno 5 caratteri dei quali una lettera minuscola, una maiuscola e una lettera;';
+    if(!preg_match($pattern,$_POST[$attribute])){
+        $str_error.= $attribute.' nel formato non valido: deve contenere almeno 5 caratteri dei quali una lettera minuscola, una maiuscola e una lettera;';
         return '';
     }
-    return $_POST['password'];
+    return $_POST[$attribute];
 }
 
 function printErrors(){
@@ -88,7 +88,7 @@ function checkUsername($type){
 function checkIfEmpty($attribute){
     global $str_error;
     if(empty($_POST[$attribute])){
-        $str_error.= 'Il campo '. $attribute.' non può essere vuoto;';
+        $str_error.= 'Il campo '.$attribute.' non può essere vuoto;';
         return true;
     }
     return false;
@@ -97,7 +97,7 @@ function checkIfEmpty($attribute){
 function checkValideInput($type){
     checkUsername($type);
     checkEmail($type);
-    checkPassword();
+    checkPassword('password');
 }
 
 function checkcolor(){
@@ -118,20 +118,20 @@ function checkClass(){
         return 'addborder';
 }
 
-function SearchAccount(){
-    global $str_error;
+function SearchAccount($pass){
     $sql = 'SELECT password FROM login WHERE username = ?';
     $db_connection = connectionToDatabase();
     $statement = mysqli_prepare($db_connection,$sql);
-    $statement->bind_param('s',$_POST['username']);
+    $statement->bind_param('s',$_SESSION['username']);
     $statement->execute();
 
     $password_found = $statement->get_result();
         if($password_found != null)
             $row = $password_found->fetch_assoc();
 
-        if(!password_verify($_POST['password'],$row['password']))
-            $str_error.= 'Password e/o username incorretti!;'; 
+        if(!password_verify($_POST[$pass],$row['password']))
+            return false;
+    return true;
 }
 
 function createBody($type){
@@ -139,9 +139,9 @@ function createBody($type){
 ?>
 
 <img id='imagebody' src= '<?php echo '../img/background'.$type.'.jpg';?>'/>
-    <div id="box_wrapper">
-        <div id="box_registration">
-            <div id="img_wrapper"></div>
+    <div id='box_wrapper'>
+        <div id='box_registration'>
+            <div id='img_wrapper'></div>
             
 <form action=
     <?php
@@ -150,14 +150,15 @@ function createBody($type){
             echo '\'../game.php\''; 
         else
             echo '\'./'.$type.'form.php\' method=\'post\''; ?> >
-<div id='errors_box' class="<?php echo checkClass();?>" style="background-color: <?php echo checkcolor(); ?>;">
+<div id='errors_box' class='<?php echo checkClass();?>' style='background-color: <?php echo checkcolor(); ?>;'>
 <?php 
     if($setValues == '' && $str_error != 'start'){
+        $_SESSION['loggedin'] = true;
         if($type == 'registration')
             $saluto = 'Benvenuto';
         else
             $saluto = 'Bentornato';
-        echo '<p class="welcome">'.$saluto.' '.$_POST['username'].'</p>';
+        echo '<p class=\'welcome\'>'.$saluto.' '.$_POST['username'].'</p>';
     }else
         echo $setValues;
 ?>
@@ -167,7 +168,7 @@ function createBody($type){
         if($_SESSION['loggedin'] == true){ 
     ?>  
         <p>Premi per accedere al gioco:</p>
-        <input type="submit" name="login" value="START" class="button"/>
+        <input type='submit' name='login' value='START' class='button'/>
     <?php
         }else{
     ?>
@@ -176,7 +177,7 @@ function createBody($type){
         </div>
         <div>
             <p>Password:</p>
-            <input name='password' type='password' value='<?php echo checkPassword();?>' placeholder='password'/><br>
+            <input name='password' type='password' value='<?php echo checkPassword('password');?>' placeholder='password'/><br>
         </div>
         <?php
             if($type == 'registration'){
@@ -185,9 +186,13 @@ function createBody($type){
                 <p>Email:</p>
                 <input name='email' type='email' value='<?php echo checkEmail($type);?>' placeholder='email'/><br>
             </div>
-        <input type='submit' name='register' value="Avanti" class="button"/>   
+        <input type='submit' name='register' value='Avanti' class='button'/>   
     <?php } else {?>
-          <input type="submit" name="login" value="LOGIN" id="login" class="button"/>
+          <input type='submit' name='login' value='LOGIN' id='login' class='button'/>
+            <div id='hyperlink_Registration_wrapper' class='wrapper'>
+                <p>User for the first time?</p>
+                <a href='./registrationform.php' class='default_style_font'>Click here to register!</a>
+            </div>
     <?php } ?>
 </form>
 <?php }

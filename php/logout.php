@@ -9,12 +9,12 @@
         header('Location: ./loginform.php');
 ?>
     <head>
-        <link rel="stylesheet" href="../css/logout.css?ts=<?=time()?>" media="screen" type="text/css">
-        <link rel="stylesheet" href="../css/default.css?ts=<?=time()?>" media="screen" type="text/css">
-        <script type="text/javascript" src="../js/endgame.js"></script>
+        <link rel='stylesheet' href='../css/logout.css?ts=<?=time()?>' media='screen' type='text/css'>
+        <link rel='stylesheet' href='../css/default.css?ts=<?=time()?>' media='screen' type='text/css'>
+        <script type='text/javascript' src='../js/endgame.js'></script>
     </head>
 <body>
-    <div id="thanks">
+    <div id='thanks'>
         <h2>
             <?php echo 'Thanks for playing '.$_SESSION['username'].'!'?>
         </h2>
@@ -25,15 +25,15 @@
                 <?php echo 'Rate the game before exiting please!' ?>
             </h3>
                 <div id='boxstars'>
-                    <div id="1" onmouseover="blurstars(event)" onclick="select(event)"></div>
-                    <div id="2" onmouseover="blurstars(event)" onclick="select(event)"></div>
-                    <div id="3" onmouseover="blurstars(event)" onclick="select(event)"></div>
-                    <div id="4" onmouseover="blurstars(event)" onclick="select(event)"></div>
-                    <div id="5" onmouseover="blurstars(event)" onclick="select(event)"></div>
+                    <div id='1' onmouseover='blurstars(event)' onclick='select(event)'></div>
+                    <div id='2' onmouseover='blurstars(event)' onclick='select(event)'></div>
+                    <div id='3' onmouseover='blurstars(event)' onclick='select(event)'></div>
+                    <div id='4' onmouseover='blurstars(event)' onclick='select(event)'></div>
+                    <div id='5' onmouseover='blurstars(event)' onclick='select(event)'></div>
                 </div>
         <?php } else ?>
             <h3> Press to confirm</h3>
-    <input id="exit" name="exit" value="EXIT" class="button" onclick="insertRating()" readonly/>
+    <input id='exit' name='exit' value='EXIT' class='button' onclick='insertRating()' readonly/>
 </body>
 
 <?php
