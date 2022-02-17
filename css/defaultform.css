@@ -77,21 +77,6 @@ form div > *{
     transform: translate(-50%);
     position: relative;
   }
-  
-  .button{
-    padding: 10px 20px;
-    font-size: 125%;
-    text-align: center;
-    margin: 5%;
-    cursor: pointer;
-    outline: none;
-    color: #fff;
-    background-color: #31f700;
-    border: none;
-    border-radius: 15px;
-    box-shadow: 0 9px #999;
-  }
-  
   .welcome{
     font-size: 30px;
     padding: 5px;

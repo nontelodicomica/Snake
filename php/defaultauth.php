@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+require './connection.php';
+
 function checkEmail($type){
     global $str_error;
     $check = checkIfIsTheSame(0,$type);
@@ -23,17 +25,16 @@ function checkIfIsTheSame($cod, $type){
             $attribute = 'username';
         else if($cod == 0)
             $attribute = 'email';
-        else
-            $attribute = 'password';
     
     $db_connection = connectionToDatabase();
     $sql = 'SELECT * FROM login WHERE '.$attribute.' = ?';
     $statement = mysqli_prepare($db_connection,$sql);
-    $statement->bind_param('s',$_POST[$attribute]);
+    $statement -> bind_param('s',$_POST[$attribute]);
     $statement -> execute();
-    if(mysqli_stmt_affected_rows($statement) > 0){
+    $found = $statement->get_result();
+    if($found -> num_rows > 0){
         if($type == 'registration')
-            $str_error .= 'E\'già presente un utente registrato con tale'.$attribute.';';
+            $str_error .= 'E\'già presente un utente registrato con tale '.$attribute.';';
         return false;
     }
     return true;
@@ -76,9 +77,10 @@ function checkUsername($type){
         return '';
 
     if($type=='registration'){
-        if(checkIfIsTheSame(1,$type))
+        if(!checkIfIsTheSame(1,$type))
             return '';
     }
+
     $_SESSION['username'] = $_POST['username'];
     return $_POST['username'];
 }
@@ -92,17 +94,10 @@ function checkIfEmpty($attribute){
     return false;
 }
 
-function connectionToDatabase(){
-    $db_connection = mysqli_connect('localhost','root','','account');
-        if(mysqli_connect_errno())
-            echo '<script>alert(\"Connessione con il DB non riuscita! Errore "'.mysqli_connect_error().')</script>';
-        return $db_connection;
-}
-
 function checkValideInput($type){
     checkUsername($type);
     checkEmail($type);
-    checkPassword($type);
+    checkPassword();
 }
 
 function checkcolor(){
@@ -123,6 +118,22 @@ function checkClass(){
         return 'addborder';
 }
 
+function SearchAccount(){
+    global $str_error;
+    $sql = 'SELECT password FROM login WHERE username = ?';
+    $db_connection = connectionToDatabase();
+    $statement = mysqli_prepare($db_connection,$sql);
+    $statement->bind_param('s',$_POST['username']);
+    $statement->execute();
+
+    $password_found = $statement->get_result();
+        if($password_found != null)
+            $row = $password_found->fetch_assoc();
+
+        if(!password_verify($_POST['password'],$row['password']))
+            $str_error.= 'Password e/o username incorretti!;'; 
+}
+
 function createBody($type){
     global $str_error;
 ?>
@@ -134,21 +145,21 @@ function createBody($type){
             
 <form action=
     <?php
-        printErrors($type);
+        $setValues = printErrors($type);
         if($_SESSION['loggedin'] == true)
             echo '\'../game.php\''; 
         else
             echo '\'./'.$type.'form.php\' method=\'post\''; ?> >
 <div id='errors_box' class="<?php echo checkClass();?>" style="background-color: <?php echo checkcolor(); ?>;">
 <?php 
-    if(printErrors($type) == '' && $str_error != 'start'){
+    if($setValues == '' && $str_error != 'start'){
         if($type == 'registration')
             $saluto = 'Benvenuto';
         else
             $saluto = 'Bentornato';
         echo '<p class="welcome">'.$saluto.' '.$_POST['username'].'</p>';
     }else
-        echo printErrors($type);
+        echo $setValues;
 ?>
 </div>
 <div>

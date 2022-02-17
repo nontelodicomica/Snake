@@ -18,7 +18,7 @@
     position: fixed;
 }
 
-.button{
+.buttonmodal{
     width: 10%; 
     height: 10%;
     z-index: 5;
@@ -40,7 +40,7 @@
 
 #previous{
     top: 87%;
-    left: 10%;
+    left: 4%;
 }
 
 #buttonspace{

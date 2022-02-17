@@ -1,0 +1,31 @@
+#infocontainer {
+    width: 40%;
+    height: 80%;
+    display: flex;
+    flex-direction: row;
+    border: solid 2px black;
+    position: fixed;
+}
+
+#contentaccountpages, #multiplechoices{
+    height: 100%;
+    position: relative;
+}
+
+#multiplechoices{
+    width: 30%;
+    background-color: purple;
+}
+
+#contentaccountpages{
+    width: 70%;
+}
+
+a{
+    width: 100%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    color: white;
+    text-align: left;
+    display: inline-block;
+}

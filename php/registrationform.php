@@ -9,7 +9,6 @@
     require './defaultauth.php';
 
     $_SESSION['loggedin'] = false;
-    $_SESSION['firsttime'] = true;
     $str_error = 'start';
 
     if(isset($_POST['register']) && $_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -30,8 +29,10 @@
 <body class="body_afterstart">
     <?php
         createBody('registration');
-        if($_SESSION['loggedin'] == true)
+        if($_SESSION['loggedin'] == true){
             insertNewUser();
+            $_SESSION['firsttime'] = true;
+        }
     ?>
 </body>
 </html>

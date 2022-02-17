@@ -173,7 +173,7 @@ class Game{
         for (let i of this.otherelem) {
                 if(this.eatOrExplode(i)){
                     this.otherelem.splice(this.otherelem.indexOf(i), 1);
-                if (this.snake.giveLength() == 0) {
+                if (this.snake.giveLength() == 1) {
                     console.log("Hai perso");
                     this.endgame();
                     return;

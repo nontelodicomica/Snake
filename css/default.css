@@ -14,21 +14,37 @@ body{
     font-weight: lighter;
 }
 
+.button{
+  padding: 10px 20px;
+  font-size: 125%;
+  text-align: center;
+  margin: 5%;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: #31f700;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+
     @media only screen and (orientation: portrait){
       #imagebody{ min-height: 100vh; min-width: 100vw; top: -10%;}
       #modal {width: 60%; height: 30%;}
       body{flex-direction: column;}
-      #backgroundgame{top: 20%; height: 50%; width: 98%; left: 49%;}
+      #content{top: 18%; width: 98%; left: 0px;}
+      #backgroundgame{height: 55%;}
       #colorchoices {flex-direction: row;}
-      #boxchangecolor {top: 80vh; left: 50%; transform: translateX(-50%);}
-      #scores {flex-direction: row; left: 50%; transform: translateX(-50%); width: 60%; height: 12%;}
+      #boxchangecolor {top: 85%; left: 10%; transform: translateX(-50%);}
+      #scores {flex-direction: row; left: 50%; transform: translateX(-50%); width: 60%; height: 8%;}
     }
   
     @media only screen and (orientation: landscape) {
       #imagebody{width: 100%; top: -55%;}
       #modal {width: 30%; height: 60%;}
       body{flex-direction: row;}
-      #backgroundgame{height: 90%; width: 50%; left: 55%; top: 1%; transform: rotate(270deg);}
+      #content{width: 50%; left: 30%;}
     }
   
     [class*="col-"] {

@@ -4,8 +4,6 @@ class ModalTutorial{
     }
 
     populateModal(){
-        document.getElementById("backgroundmodal").hidden = false;
-        document.getElementById("modal").hidden = false;
         for(let i = 0; i < 2; i++)
             this.createButtons(i);
         this.createModalContent();
@@ -28,7 +26,7 @@ class ModalTutorial{
                     j.addEventListener("click",this.previousmodal.bind(this));
                 }
             j.style.backgroundImage = "url(\"./img/buttons/"+image+".png\")";
-            j.className = "button";
+            j.className = "buttonmodal";
             document.getElementById("buttonspace").appendChild(j);
     }
 

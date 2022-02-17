@@ -1,0 +1,32 @@
+#boxstars > *{
+    width: 51px;
+    height: 51px;
+    background-image: url('../img/buttons/star.png');
+    opacity: 0.5;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#boxstars{
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+}
+
+#thanks{
+    width: 300px;
+    height: 300px;
+    border: solid 2px rgb(98, 0, 255);
+    padding: 5%;
+    text-align: center;
+    border-radius: 20%;
+}
+
+#exit{
+    width: 30%;
+}
+
+#boxstars{
+    left: 6%;
+    position: relative;
+}
