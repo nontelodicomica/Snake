@@ -2,7 +2,7 @@
 <?php   
     session_start();
 
-    require './connection.php';
+    include './searchinDB.php';
     
     $rating = $_GET['rating'];
     if($_SESSION['loggedin'] == false)
@@ -19,7 +19,7 @@
             <?php echo 'Thanks for playing '.$_SESSION['username'].'!'?>
         </h2>
         <?php 
-            $check = searchIfExistsRating();
+            $check = searchIfExists('recensioni');
             if($_SESSION['firsttime'] == true || !$check) { ?>
             <h3>
                 <?php echo 'Rate the game before exiting please!' ?>
@@ -49,18 +49,6 @@
         }
         session_destroy();
         header('Location: ../index.html');
-    }
-
-    function searchIfExistsRating(){
-        $db = connectionToDatabase();
-        $sql = 'SELECT * FROM recensioni WHERE username = ?';
-        $statement = mysqli_prepare($db,$sql);
-        $statement -> bind_param('s', $_SESSION['username']);
-        $statement-> execute();
-        $statement-> store_result();
-        if($statement->num_rows > '0')
-            return true;
-        return false;
     }
 ?>
 </html>

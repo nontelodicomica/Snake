@@ -26,13 +26,13 @@ class ModalTutorial{
                     j.addEventListener("click",this.previousmodal.bind(this));
                 }
             j.style.backgroundImage = "url(\"./img/buttons/"+image+".png\")";
-            j.className = "buttonmodal";
+            j.className = "buttonmodaltutorial";
             document.getElementById("buttonspace").appendChild(j);
     }
 
     startgame(){
-        document.body.removeChild(document.getElementById("modal"));
-        document.body.removeChild(document.getElementById("backgroundmodal"));
+        document.body.removeChild(document.getElementById("modaltutorial"));
+        document.body.removeChild(document.getElementById("backgroundmodaltutorial"));
     }
 
     createModalContent(){

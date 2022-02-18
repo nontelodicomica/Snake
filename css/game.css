@@ -3,34 +3,31 @@ body{
 }
 
 #backgroundgame{
-    height: 98%;
-    width: 98%;
     cursor: pointer;
-    position: relative;
     margin: 0px 5px 0px 5px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    background-color: rgb(140, 209, 37);
     align-content: center;
-}
-
-#content{
-    top: 0px;
-    width: 100%;
-    height: 100%;
-    min-height: 100vh;
-    max-width: 100vw;
-    position: fixed;
+    width: 98vmin;
+    height: 98vmin;
+    position: relative;
 }
 
 #backgroundgame > *{
-    background-color: rgb(140, 209, 37);
-    background-size: cover;
+    background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     height: 3.2258%;
     width: 3.2258%;
     display: inline-block;
+    padding: 0;
+    margin: 0;
+    image-rendering: optimizeQuality;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
     position: relative;
 }
 
@@ -60,4 +57,12 @@ body{
 
 .withcursor{
     cursor: pointer;
+}
+
+@media only screen and (orientation: portrait){
+    #backgroundgame {left: -2%;}
+} 
+
+@media only screen and (orientation: landscape) {
+    #backgroundgame {top: -15vh; left: 15%;}
 }

@@ -12,15 +12,20 @@
     background-color: black;
 }
 
-.boxscore, #boxchangecolor h3{
+.boxscore h3, #title h3{
     color: white;
-    margin-top: 1%;
-    margin-bottom: 1%;
+    margin: 1% 0px 1% 0px;
+    width: 20px;
+    position: relative;
+}
+
+.boxscore > *{
+    display: inline;
 }
 
 .boxscore input{
-    height: 30%;
-    width: 20%;
+    height: 20px;
+    width: 30px;
     font-size: 20px;
     font-weight: bold;
     text-align: right;
@@ -45,21 +50,21 @@
 }
 
 #menu, #scores, #boxchangecolor{
-    top: 1vh;
+    top: 0;
     position: fixed;
 }
 
 #boxchangecolor{
     display: flex;
-    width: 20px;
+    width: 20%;
     left: 82%;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
 }
 
 #scores{
-    left: 13%; 
-    width: 15%;
+    left: 10%; 
+    width: 150px;
     display: flex;
     flex-direction: column;
 }
@@ -120,3 +125,9 @@ a:hover{
 #confermaexit{
     z-index: 1;
 }
+
+@media only screen and (orientation: portrait){
+    #colorchoices {flex-direction: row;}
+    #boxchangecolor {top: 85%; left: 0%; flex-direction:column; width:100%;}
+    #scores {flex-direction: row; left: 50%; width: 300px; transform: translateX(-50%); height: 5%;}
+} 

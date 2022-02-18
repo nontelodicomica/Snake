@@ -21,7 +21,7 @@ body{
   margin: 5%;
   cursor: pointer;
   outline: none;
-  color: #fff;
+  color: black;
   background-color: #31f700;
   border: none;
   border-radius: 15px;
@@ -33,18 +33,25 @@ body{
       #imagebody{ min-height: 100vh; min-width: 100vw; top: -10%;}
       #modal {width: 60%; height: 30%;}
       body{flex-direction: column;}
-      #content{top: 18%; width: 98%; left: 0px;}
-      #backgroundgame{height: 55%;}
-      #colorchoices {flex-direction: row;}
-      #boxchangecolor {top: 85%; left: 10%; transform: translateX(-50%);}
-      #scores {flex-direction: row; left: 50%; transform: translateX(-50%); width: 60%; height: 8%;}
+      #errors_box {font-size: 25px;}
+      #box_registration {padding: 5% 7% 5% 6%;}
+      form {width: 550px; font-size: 30px;}
+      input {font-size: 35px; width: 40%;}
+      form div > *{margin-bottom: 5%;}
+      input::placeholder {font-size: 30px;}
+      #img_wrapper {left: 40%;}
+      .input_div {margin: 6%;}
     }
   
     @media only screen and (orientation: landscape) {
       #imagebody{width: 100%; top: -55%;}
       #modal {width: 30%; height: 60%;}
-      body{flex-direction: row;}
-      #content{width: 50%; left: 30%;}
+      body {flex-direction: row;}
+      form {width: 250px;}
+      #errors_box {font-size: 17px;}
+      #img_wrapper {left: 25%;}
+      #box_registration{padding: 2% 5% 2% 5%;}
+      .input_div {margin: 2%;}
     }
   
     [class*="col-"] {

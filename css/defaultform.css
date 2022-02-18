@@ -41,24 +41,22 @@ a:hover:after, a:focus:after{
 }
 
 #img_wrapper{
-    width: 90px;
-    height: 90px;
-    left: 35%;
+    width: 100px;
+    height: 100px;
     background: url("../img/oldsnake.jpg");
-    background-size: cover;
+    background-size: contain;
     position: relative;
 }
 
-form div > *{
-    margin: 2%;
+.input_div{
     width: 50%;
-    font-size: 115%;
     display: inline;
 }
 
 #box_registration{
+    max-height: 90vh;
+    max-width: 90vw;
     border-radius: 10%;
-    padding: 2% 5% 2% 5%;
     border: 4px solid red;
     box-shadow: 10px 10px 10px 10px black;
     background-color: white;
@@ -66,22 +64,37 @@ form div > *{
     position: relative;
 }
 
+input{
+    border-width: 0;
+    padding-top: 5%;
+    border-bottom: solid 1px black;
+    outline: none;
+}
 
 #errors_box{
-    width: 250px;
+    width: 100%;
     border-radius: 5%;
     padding: 1%;
-    font-size: 80%;
     margin-bottom: 3%;
-    left: 50%;
+    left: 45%;
+    color: white;
     transform: translate(-50%);
     position: relative;
   }
+
+#errors_box > *{
+    margin: 1%;
+}
+
   .welcome{
     font-size: 30px;
     padding: 5px;
   }
+
+form > div{
+    margin: 5%;
+}
   
 form{
-    margin: 5%;
+    position: relative;
 }

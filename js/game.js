@@ -106,10 +106,12 @@ class Game{
     deleteborder() {
         document.getElementById("backgroundgame").removeAttribute("class", "withborder");
         document.getElementById("backgroundgame").setAttribute("class", "noborder");
-        if (this.intervals[1].int != null) {
+        if (this.intervals != null) {
+            if(this.intervals[1].int != null){
             clearInterval(this.intervals[1].int);
             this.intervals[1].int = setInterval(this.addborder.bind(this), this.intervals[1].value);
         }
+    }
         --this.intervals[1].value;
     }
 
@@ -177,26 +179,20 @@ class Game{
 
     checkifeat() {
         for (let i of this.otherelem) {
-            if (this.snake.giveLength() == 2) {
-                console.log("Hai perso");
-                this.endgame();
-                return;
-            }
-                if(this.eatOrExplode(i)){
-                    this.otherelem.splice(this.otherelem.indexOf(i), 1);
-            }
+            if(this.eatOrExplode(i))
+                this.otherelem.splice(this.otherelem.indexOf(i), 1);
         }
     }
 
     endgame() {
+        for(let i of this.timeout)
+        clearTimeout(i);
+        this.timeout = null;
+        
         for (let i of this.intervals)
             i.clearInt();
         this.intervals = null;
 
-        for(let i of this.timeout)
-            clearTimeout(i);
-
-        this.timeout = null;
         document.removeEventListener("keydown", this.event[0]);
         document.removeEventListener("keydown", this.event[1]);
         this.event = null;
@@ -239,7 +235,8 @@ class Game{
     }
 
     checkifloose() {
-        if (this.checkIfTouchBorder()) {
+        if (this.checkIfTouchBorder() || this.snake.giveLength() == 2) {
+            youlose();
             this.endgame();
             return true;
         }

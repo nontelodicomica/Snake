@@ -1,0 +1,84 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+
+body {
+	font-family: 'Roboto', Helvetica, sans-serif;
+}
+
+button {
+    padding: 10px;
+    margin: 5px;
+	  font-family: 'Roboto', Helvetica, sans-serif;
+	  border-radius: 3px;
+	  display: inline;
+	  width: 120px;
+	  color: #FFFFFF;
+}
+
+button#playagain {
+  margin-left: 0px;
+  background-color: #00A82D;
+	border: 1px solid #00A82D;
+}
+
+button#exit {
+  margin-right: 0px;
+  background-color: #CC0202;
+	border: 1px solid #CC0202;
+}
+
+button:hover {
+  transition: all 400ms ease;
+  cursor: pointer;
+}
+
+button#playagain:hover {
+	border-color: #0DCD44;
+	background-color: #0DCD44;
+}
+
+button#exit:hover {
+	border-color: #FF0202;
+	background-color: #FF0202;
+}
+
+button:visited, button:active, button:focus {
+	outline: none;
+}
+
+#endgamemodal {
+    position: absolute;
+    display: none;
+    text-align: center;
+    vertical-align: middle;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 260px;
+    height: 130px;
+    padding: 10px;
+    background-color: #FFF;
+    border-radius: 5px;
+}
+
+.modal-container {
+  position: relative;
+  background-color: #FFF;
+  margin: auto;
+  border: 5px solid #EEE;
+  width: 270px;
+  animation: slide 20s;
+  border-radius: 5px; 
+  box-shadow: 0 5px 10px 0 rgba(0,0,0,0.2);
+} 
+
+#endgamebuttons{
+  width: 100%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,0);
+  position: absolute;
+}
+
+@keyframes slide {0%, 100% {right: -1500px} 10%, 90% {right:0}} 

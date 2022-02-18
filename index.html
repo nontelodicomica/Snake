@@ -9,8 +9,20 @@
     <title>Snake</title>
 </head>
 <body>
-    <div id="logo_content" class="logo_content">
-        <div id="logo" class="logo"></div>
+    <div id='modal_incipit' class="modal">
+        <input id="modal__trigger" type="checkbox" />
+        <label for="modal__trigger">Pay attention</label>
+        <div class="modal__overlay" role="dialog" aria-labelledby="modal__title" aria-describedby="modal_desc">
+            <div class="modal__wrap">
+                <label for="modal__trigger" onclick='begin()'>&#10006;</label>
+                <h2 id="modal__title">Attenzione!</h2>
+                <p id="modal__desc">Chiudere il modal solo quando si desidera effettivamente visualizzare il contenuto della pagina!</p>
+            </div>
+        </div>
     </div>
+    <div id='logo_container' hidden>
+        <div class='logo'></div>
+    </div>
+</div>
 </body>
 </html>

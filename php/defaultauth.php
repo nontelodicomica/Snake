@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require './connection.php';
+include './searchinDB.php';
 
 function checkEmail($type){
     global $str_error;
@@ -63,7 +63,7 @@ function printErrors(){
             $array = explode(';',$str_error);
             foreach($array as $value){
                 if($value !== '')
-                    $print.='<p>'.$value.'</p><br>';
+                    $print.='<p>'.$value.'</p>';
             }
         }
         else
@@ -118,22 +118,6 @@ function checkClass(){
         return 'addborder';
 }
 
-function SearchAccount($pass){
-    $sql = 'SELECT password FROM login WHERE username = ?';
-    $db_connection = connectionToDatabase();
-    $statement = mysqli_prepare($db_connection,$sql);
-    $statement->bind_param('s',$_SESSION['username']);
-    $statement->execute();
-
-    $password_found = $statement->get_result();
-        if($password_found != null)
-            $row = $password_found->fetch_assoc();
-
-        if(!password_verify($_POST[$pass],$row['password']))
-            return false;
-    return true;
-}
-
 function createBody($type){
     global $str_error;
 ?>
@@ -163,29 +147,29 @@ function createBody($type){
         echo $setValues;
 ?>
 </div>
-<div>
-    <?php 
-        if($_SESSION['loggedin'] == true){ 
-    ?>  
-        <p>Premi per accedere al gioco:</p>
-        <input type='submit' name='login' value='START' class='button'/>
-    <?php
-        }else{
-    ?>
-        <p>Username:</p> 
-            <input name='username' type='text' value='<?php echo checkUsername($type);?>' placeholder='username'/><br>
-        </div>
-        <div>
-            <p>Password:</p>
-            <input name='password' type='password' value='<?php echo checkPassword('password');?>' placeholder='password'/><br>
-        </div>
+    <div class='input_div'>
+        <?php 
+            if($_SESSION['loggedin'] == true){ 
+        ?>  
+            <p>Premi per accedere al gioco:</p>
+            <input type='submit' name='login' value='START' class='button'/>
+        <?php
+            }else{
+        ?>
+            <strong>Username:</strong> 
+                <input name='username' type='text' value='<?php echo checkUsername($type);?>' placeholder='username'/>
+    </div>
+    <div class='input_div'>
+            <strong>Password:</strong>
+            <input name='password' type='password' value='<?php echo checkPassword('password');?>' placeholder='password'/>
+    </div>
         <?php
             if($type == 'registration'){
         ?>
-            <div>
-                <p>Email:</p>
-                <input name='email' type='email' value='<?php echo checkEmail($type);?>' placeholder='email'/><br>
-            </div>
+    <div class='input_div'>
+        <strong>Email:</strong>
+        <input name='email' type='email' value='<?php echo checkEmail($type);?>' placeholder='email'/>
+    </div>
         <input type='submit' name='register' value='Avanti' class='button'/>   
     <?php } else {?>
           <input type='submit' name='login' value='LOGIN' id='login' class='button'/>

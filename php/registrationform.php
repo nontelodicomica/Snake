@@ -6,7 +6,7 @@
 <?php 
     session_start();
 
-    require './defaultauth.php';
+    include './defaultauth.php';
 
     $_SESSION['loggedin'] = false;
     $str_error = 'start';

@@ -1,5 +1,7 @@
 <?php
     session_start(); 
+    include './defaultauth.php';
+
     $_SESSION['firsttime'] = false;
     $_SESSION['test'] = false;
 ?>
@@ -25,6 +27,8 @@
                                     break;
                     case 'prova': showTest();
                                     break;
+                    case 'classifica': showStandings();
+                                        break;
                     }
                 ?>
             </div>
@@ -33,23 +37,6 @@
 </html>
 
 <?php
-    function searchEmail(){
-        $sql = 'SELECT email FROM login WHERE username = ?';
-        $db_connection = mysqli_connect('localhost','root','','account');
-            if(mysqli_connect_errno())
-                echo '<script>alert("Connessione con il DB non riuscita! Errore"'.mysqli_connect_error().'")</script>';
-        $statement = mysqli_prepare($db_connection,$sql);
-        $statement -> bind_param('s', $_SESSION['username']);
-        $statement -> execute();
-        
-        $result = $statement -> get_result();
-            if($result != null ){
-                $row = $result -> fetch_assoc();
-                return $row['email'];;
-            }
-            else
-                return $result;
-    }
 
     function checkOldPassword(){
         if(checkPassword('oldpassword') !== '' && checkIfIsOld() !== '')
@@ -59,7 +46,8 @@
 
     function checkIfIsOld(){
         global $str_error;
-            if(!SearchAccount('oldpassword')){
+        $passwordfound = Search('password');
+            if(!password_verify($_POST['oldpassword'],$passwordfound)){
                 $str_error.= 'La password attuale inserita non è corretta;';
                 return '';
             }
@@ -68,9 +56,7 @@
 
     function changePassword(){
         $sql = 'UPDATE login SET password = ? WHERE username = ?';
-        $db_connection = mysqli_connect('localhost','root','','account');
-            if(mysqli_connect_errno())
-                echo '<script>alert("Connessione con il DB non riuscita! Errore"'.mysqli_connect_error().'")</script>';
+        $db_connection = connectionToDatabase();
         $statement = mysqli_prepare($db_connection,$sql);
         $newpassword = password_hash($_POST['newpassword'],PASSWORD_BCRYPT);
         $statement -> bind_param('ss', $newpassword, $_SESSION['username']);
@@ -83,15 +69,13 @@
             <p>Username</p>
             <em> <?php echo $_SESSION['username'] ?></em>
             <p>Indirizzo e-mail</p>
-            <em><?php echo searchEmail(); ?></em>
+            <em><?php echo Search('email'); ?></em>
             <p>Reimposta la password</p>
 
             <div id='result'>
                 <?php
-                    require './defaultauth.php';
-
                     if($_SERVER['REQUEST_METHOD'] == 'POST'){
-                            global $str_error;
+                        global $str_error;
                             $str_error = '';
                             checkPassword('newpassword');
                             checkOldPassword();
@@ -129,4 +113,32 @@
         <?php 
             $_SESSION['firsttime'] = true;
             $_SESSION['test'] = true;
-        }?>
+        }
+        
+        $partitetot = 0;
+        function showStandings(){
+            $sql = 'SELECT * FROM partite WHERE username = ?';
+            $db_connection = connectionToDatabase();
+            $statement = mysqli_prepare($db_connection,$sql);
+            $statement -> bind_param('s', $_SESSION['username']);
+            $statement -> execute();
+            $result = $statement -> get_result();
+            $partitetot = $result -> num_rows;
+            ?>
+            <div id='standings'>
+                <div id= 'partitetot'>
+                    <h3>Partite giocate:</h3>
+                    <input name='partitetot' value = '<?php 
+                                                        global $partitetot;
+                                                        echo $partitetot; ?>' readonly/>
+                </div>
+            </div>
+            <div id="scores">
+            <?php
+            if($result != null){
+                $row = $result-> fetch_assoc(); 
+                foreach($row as $value)?>
+                    <p> <?php echo $value?> </p>
+        <?php  }
+        }    
+    ?>
