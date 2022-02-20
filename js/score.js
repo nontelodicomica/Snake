@@ -4,13 +4,13 @@ function youlose(){
     if(score !== null){
       document.getElementById('endgamemodal').style.display = 'block';
 
-      let first;
-      if(score.value > bestscore.value)
+      var first;
+      if(parseInt(score.value) > parseInt(bestscore.value))
         first = 'New best score: ';
       else
         first = 'Punteggio conseguito: ';
 
-      document.getElementById('score').innerText = first+score.value + '!';
+      document.getElementById('score').innerText = first+score.value + ' !';
       document.getElementById('exit').addEventListener('click',function(){
                                                                 location.replace('./php/logout.php');
       });
@@ -21,9 +21,9 @@ function youlose(){
             dataType: 'application/json'
           });
   }else{ 
-    document.getElementById('endgamemodal').removeChild(document.getElementById('playagain'));
+    document.getElementById('endgamebuttons').removeChild(document.getElementById('playagain'));
     document.getElementById('exit').addEventListener('click',function(){
-                                                              location.replace('./php/account.php');
+                                                              location.replace('./php/gamemenu/menu.php');
                                                             });
     document.getElementById('endgamemodal').style.display = 'block';
     document.getElementById('score').innerText = 'Fine prova!';

@@ -59,10 +59,14 @@ body{
     cursor: pointer;
 }
 
-@media only screen and (orientation: portrait){
-    #backgroundgame {left: -2%;}
+@media only screen and (orientation: portrait) {
+    #backgroundgame {left: -10px;}
 } 
 
-@media only screen and (orientation: landscape) {
-    #backgroundgame {top: -15vh; left: 15%;}
+@media only screen and (orientation: landscape){
+    #backgroundgame {top: -7px;}
+}
+
+@media only screen and (max-height: 40%) and (max-height: 246%){
+    #backgroundgame {left: 10%;}
 }

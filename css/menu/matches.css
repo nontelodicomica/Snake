@@ -1,0 +1,23 @@
+#scores p{
+    margin: 0;
+    display: inline;
+}
+
+#matchescontent{
+    display: flex;
+    flex-direction: row;
+}
+
+#matchescontent div{
+    margin: 2%;
+    width: 30%;
+}
+
+#matchescontent p{
+    font-size: 20px;
+}
+
+#matchescontent p{
+    margin: 1%;
+    font-size: larger;
+}

@@ -1,0 +1,18 @@
+#testcontent{
+    font-size: 30px;
+    margin: 5%;
+}
+
+#testcontent button{
+    left: 35%;
+    font-weight: bolder;
+    padding: 20px 40px 20px 40px;
+    margin: 2%;
+    font-size: 25px;
+    transform: translateX(-50%);
+    position: relative;
+}
+
+@media (orientation: landscape) {
+    #testcontent {font-size: 25px;}
+}

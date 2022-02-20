@@ -18,7 +18,7 @@ body{
   padding: 10px 20px;
   font-size: 125%;
   text-align: center;
-  margin: 5%;
+  margin: 3%;
   cursor: pointer;
   outline: none;
   color: black;
@@ -27,33 +27,3 @@ body{
   border-radius: 15px;
   box-shadow: 0 9px #999;
 }
-
-
-    @media only screen and (orientation: portrait){
-      #imagebody{ min-height: 100vh; min-width: 100vw; top: -10%;}
-      #modal {width: 60%; height: 30%;}
-      body{flex-direction: column;}
-      #errors_box {font-size: 25px;}
-      #box_registration {padding: 5% 7% 5% 6%;}
-      form {width: 550px; font-size: 30px;}
-      input {font-size: 35px; width: 40%;}
-      form div > *{margin-bottom: 5%;}
-      input::placeholder {font-size: 30px;}
-      #img_wrapper {left: 40%;}
-      .input_div {margin: 6%;}
-    }
-  
-    @media only screen and (orientation: landscape) {
-      #imagebody{width: 100%; top: -55%;}
-      #modal {width: 30%; height: 60%;}
-      body {flex-direction: row;}
-      form {width: 250px;}
-      #errors_box {font-size: 17px;}
-      #img_wrapper {left: 25%;}
-      #box_registration{padding: 2% 5% 2% 5%;}
-      .input_div {margin: 2%;}
-    }
-  
-    [class*="col-"] {
-      width: 100%;
-    }

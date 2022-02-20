@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 include './searchinDB.php';
 
 function checkEmail($type){
@@ -73,8 +72,17 @@ function printErrors(){
 }
 
 function checkUsername($type){
+    global $str_error;
+
     if(checkIfEmpty('username'))
         return '';
+
+    if($type == 'login'){
+        if(!searchIfExists('login')){
+            $str_error.= 'L\'utente inserito non è presente nel DB;';
+            return '';
+        }
+    }
 
     if($type=='registration'){
         if(!checkIfIsTheSame(1,$type))
@@ -86,7 +94,7 @@ function checkUsername($type){
 }
 
 function checkIfEmpty($attribute){
-    global $str_error;
+    global $str_error;    
     if(empty($_POST[$attribute])){
         $str_error.= 'Il campo '.$attribute.' non può essere vuoto;';
         return true;
@@ -110,14 +118,6 @@ function checkcolor(){
         return 'red';
     }
 
-function checkClass(){
-    global $str_error;
-    if($str_error == 'start')
-        return '';
-    else
-        return 'addborder';
-}
-
 function createBody($type){
     global $str_error;
 ?>
@@ -134,7 +134,7 @@ function createBody($type){
             echo '\'../game.php\''; 
         else
             echo '\'./'.$type.'form.php\' method=\'post\''; ?> >
-<div id='errors_box' class='<?php echo checkClass();?>' style='background-color: <?php echo checkcolor(); ?>;'>
+<div id='errors_box' class='errors_box' style='background-color: <?php echo checkcolor(); ?>;'>
 <?php 
     if($setValues == '' && $str_error != 'start'){
         $_SESSION['loggedin'] = true;
@@ -147,7 +147,7 @@ function createBody($type){
         echo $setValues;
 ?>
 </div>
-    <div class='input_div'>
+    <div class='inputinfo'>
         <?php 
             if($_SESSION['loggedin'] == true){ 
         ?>  
@@ -159,14 +159,14 @@ function createBody($type){
             <strong>Username:</strong> 
                 <input name='username' type='text' value='<?php echo checkUsername($type);?>' placeholder='username'/>
     </div>
-    <div class='input_div'>
+    <div class='inputinfo'>
             <strong>Password:</strong>
             <input name='password' type='password' value='<?php echo checkPassword('password');?>' placeholder='password'/>
     </div>
         <?php
             if($type == 'registration'){
         ?>
-    <div class='input_div'>
+    <div class='inputinfo'>
         <strong>Email:</strong>
         <input name='email' type='email' value='<?php echo checkEmail($type);?>' placeholder='email'/>
     </div>
@@ -175,7 +175,7 @@ function createBody($type){
           <input type='submit' name='login' value='LOGIN' id='login' class='button'/>
             <div id='hyperlink_Registration_wrapper' class='wrapper'>
                 <p>User for the first time?</p>
-                <a href='./registrationform.php' class='default_style_font'>Click here to register!</a>
+                <a id='linkregistration' href='./registrationform.php' class='default_style_font'>Click here to register!</a>
             </div>
     <?php } ?>
 </form>

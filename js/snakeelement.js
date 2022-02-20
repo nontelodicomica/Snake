@@ -9,16 +9,16 @@ class Snake_Element {
     checkstartrotation() {
         if (this.inc == 1) {
             if (this.sign == 1)
-                return "rotate270";
+                return 'rotate270';
 
             else
-                return "rotate90";
+                return 'rotate90';
         } else {
             if (this.sign == 0)
-                return "rotate180";
+                return 'rotate180';
 
             else
-                return "";
+                return '';
         }
     }
 
@@ -52,26 +52,26 @@ class Snake_Element {
         if((this.inc == 1 && this.sign == 0 && previous.sign == 0) ||
             (this.inc == 31 && this.sign == 1 && previous.sign == 1)){
                 if (this.position < snakelength - 1 || this.inc == 1)
-                    return "rotate180";
+                    return 'rotate180';
                 else 
-                    return "rotate270";
+                    return 'rotate270';
         }else if((this.inc == 1 && this.sign == 1 && previous.sign == 1) ||
                 (this.inc == 31 && this.sign == 0 && previous.sign == 0))
                 if(this.position < snakelength - 1 || this.inc == 1)
-                    return "";
+                    return '';
                 else
-                    return "rotate90";
+                    return 'rotate90';
                 else {
                         if(previous.sign == 0 && this.sign == 1){
                             if(this.position < snakelength - 1 || this.inc == 31)
-                                return "rotate90";
+                                return 'rotate90';
                             else
-                                return "rotate180";
+                                return 'rotate180';
                         }else if(previous.sign == 1 && this.sign == 0){
                             if(this.position < snakelength - 1 || this.inc == 31)
-                                return "rotate270";
+                                return 'rotate270';
                             else
-                                return "";
+                                return '';
                         }
                     }
     }

@@ -9,6 +9,7 @@
     <link rel='stylesheet' href='./css/modaltutorial.css?ts=<?=time()?>' media='screen' type='text/css'>
     <link rel='stylesheet' href='./css/default.css?ts=<?=time()?>' media='screen' type='text/css'>
     <link rel='stylesheet' href='./css/modalendgame.css?ts=<?=time()?>' media='screen' type='text/css'>
+    <link rel='stylesheet' href='./css/menu/menu.css?ts=<?=time()?>' media='screen' type='text/css'>
     <script type='text/javascript' src='./js/intervals.js'></script>
     <script type='text/javascript' src='./js/snakeelement.js'></script>
     <script type='text/javascript' src='./js/snake.js'></script>
@@ -17,6 +18,7 @@
     <script type='text/javascript' src='./js/game.js'></script>
     <script type='text/javascript' src='./js/score.js'></script>
     <script type='text/javascript' src='./js/start.php'></script>
+    <script type='text/javascript' src='./js/menu.js'></script>
     <script type='text/javascript' src='https://code.jquery.com/jquery-3.4.0.min.js'></script>
     <title>Welcome to Snake</title>
 </head>
@@ -25,28 +27,29 @@
 <?php
     session_start();
     include './php/searchinDB.php';
+    include './php/modaltutorial.php';
 
-    if(isset($_GET['exit']) && $_GET['exit'] == true){?>
-            <div id='confermaexit'>
-                <h3>Conferma</h3>
-                <strong>Tornare al menù principale?</strong>
-                    <button name='conferma' onclick='location.replace("./php/account.php")'>OK</button>
-                    <button name='annulla' onclick='location.replace("./game.php")'>Annulla</button>
-            </div>
-    <?php }
+if($_GET['test']==true){
+    $_SESSION['firsttime'] = true;
+    $_SESSION['test'] = true;
+}
 
 if($_SESSION['loggedin'] == true){ ?>
-    <div id='menu'>
-        <ul>
-            <?php if($_SESSION['test'] == true) {?>
-                <li> <a onclick= 'location.replace("./game.php?exit=true")'>Exit</a>
-            <?php } else {?>
-                <li> <a href = './php/account.php'> Account </a></li>
-                <li> <a onclick='location.replace("./php/logout.php")'> Logout </a></li>
-            <?php } ?>
-        </ul>
+    <div id='toggle' onmouseover='openmenu()'>
+        <div class='one'></div>
+        <div class='two'></div>
+        <div class='three'></div>
     </div>
-
+        <div id='menu' onmouseleave='hidemenu()'>
+            <?php if($_SESSION['test'] == true) {?>
+                    <a onclick= 'youlose()'>Exit</a>
+                <?php } else {?>
+                    <a href = './php/gamemenu/menu.php'> Account </a>
+                    <a onclick='location.replace("./php/logout.php")'> Logout </a>
+                <?php } ?>
+            </ul>
+        </div>
+   
         <?php if($_SESSION['test'] == false) {?>
             <div id='scores' class='nocursor'>
                 <div id='boxcurrentscore' class='boxscore'>
@@ -62,9 +65,7 @@ if($_SESSION['loggedin'] == true){ ?>
                 </div>
             </div>
         <?php } ?>
-            <div id='content'>
                 <div id='backgroundgame' class='noborder withcursor'></div>
-            </div>
                 <div id='boxchangecolor' class='withcursor'>
                     <h3>Change color: </h3>
                     <div id='colorchoices'>
@@ -81,7 +82,8 @@ if($_SESSION['loggedin'] == true){ ?>
                 <div id='modaltutorial' class='modal'>
                     <div id ='buttonspace'>
                         <div id='contentmodal'>
-                            <div id='description'></div>
+                            <div id='description'>
+                            </div>
                         </div>
                 </div>
             </div>
@@ -91,14 +93,12 @@ if($_SESSION['loggedin'] == true){ ?>
     <?php } else 
             header('Location: ./php/loginform.php');?>
 
-    <div id="endgamemodal">
-        <h4 id='score'></h4>
-        <div id="endgamebuttons">
-            <?php if($_SESSION['test'] == false) ?>
-                <button id="playagain" onclick="location.replace('./game.php')">RIGIOCA</button>
-            <button id="exit">ESCI</button>
-        </div>
+    <div id='endgamemodal' class='endgamemodal'>
+            <h4 id='score'></h4>
+            <div id='endgamebuttons'>
+                <button id='playagain' class='greenbutton' onclick='location.replace("./game.php")'>RIGIOCA</button>
+                <button id='exit' class='redbutton'>ESCI</button>
+            </div>
     </div>
-
 </body>
 </html>

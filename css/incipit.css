@@ -22,6 +22,7 @@
     background-image: url("../img/intro.png");
     animation: fadein 1.5s ease-out forwards, skew 1s ease-out 1.8s forwards;
     margin-bottom: 20px;
+    left: -3%;
 }
 
 @keyframes skew {
@@ -34,11 +35,8 @@
     to {opacity: 1; width: 100px; height: 100px;}
 }
 
-@import url(https://fonts.googleapis.com/css?family=Lato:300,400,900);
-@import url(https://fonts.googleapis.com/css?family=Audiowide);
-
 body {
-  background: #f2f1f1;
+  background: white;
   color: #5E5E5E; 
   font-family: 'Lato', sans-serif;
   font-weight: 300;
@@ -67,7 +65,7 @@ h2 {
 }
 
 .modal {
-  background: #fff;
+  background: #b71f1f;;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.15);
   display: inline-block;
   padding: 1em;
@@ -80,8 +78,8 @@ h2 {
 }
 
 .modal > label {
-  background: #FFD300;
-  border: 1px solid #f0c600;
+  background: white;
+  border: 1px solid white;
   border-radius: .2em;
   color: #000000;
   cursor: pointer;
@@ -132,7 +130,7 @@ h2 {
 }
 
 .modal__wrap label {
-  background: #FFD300;
+  background: white;
   border-radius: 50%;
   color: #000000;
   cursor: pointer;
@@ -146,13 +144,13 @@ h2 {
 }
 
 .modal__wrap h2 {
-  color: #FFD300;
+  color: white;
   margin-bottom: 1em;
   text-transform: uppercase;
 }
 
 .modal__wrap p {
-  color: #FFD300;
+  color: white;
   text-align: justify;
 }
 
@@ -177,4 +175,3 @@ input:checked ~ .modal__overlay {
   transform: scale(1);
   z-index: 800;
 }
-

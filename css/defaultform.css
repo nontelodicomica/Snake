@@ -1,4 +1,4 @@
-a{
+#linkregistration{
     line-height: 1;
     display: inline-block;
     color: rgb(52, 204, 85);
@@ -6,7 +6,7 @@ a{
     cursor: pointer;
 }
 
-a:after{
+#linkregistration:after{
     display: block;
     content: '';
     height: 2px;
@@ -15,12 +15,11 @@ a:after{
     transition: width .3s ease-in-out;
 }
 
-a:hover:after, a:focus:after{
+#linkregistration:hover:after, #linkregistration:focus:after{
     width: 100%;
 }
 
 .body_afterstart{
-    display:unset;
     background-color: black;
 }
 
@@ -48,11 +47,6 @@ a:hover:after, a:focus:after{
     position: relative;
 }
 
-.input_div{
-    width: 50%;
-    display: inline;
-}
-
 #box_registration{
     max-height: 90vh;
     max-width: 90vw;
@@ -65,36 +59,60 @@ a:hover:after, a:focus:after{
 }
 
 input{
+    width: 40%;
     border-width: 0;
-    padding-top: 5%;
+    font-size: 20px;
     border-bottom: solid 1px black;
     outline: none;
 }
 
-#errors_box{
+.errors_box{
     width: 100%;
     border-radius: 5%;
-    padding: 1%;
-    margin-bottom: 3%;
     left: 45%;
     color: white;
+    background-color: red;
     transform: translate(-50%);
+    border: solid 1px black;
     position: relative;
   }
 
-#errors_box > *{
-    margin: 1%;
+.errors_box > *{
+    margin: 0px;
 }
 
   .welcome{
     font-size: 30px;
     padding: 5px;
   }
-
-form > div{
-    margin: 5%;
-}
   
 form{
     position: relative;
 }
+
+#hyperlink_Registration_wrapper > *{
+    margin: 1px;
+}
+
+@media only screen and (orientation: landscape) {
+    #imagebody{width: 100%; top: -55%;}
+    body {flex-direction: row;}
+    form {width: 350px;}
+    .errors_box {font-size: 18px;}
+    #img_wrapper {left: 35%;}
+    #box_registration {padding: 0 3% 2% 3%; top: -2%;}
+    form > div {margin: 3%;}
+  }
+
+  @media only screen and (orientation: portrait){
+    #imagebody{ min-height: 100vh; min-width: 100vw; top: -10%;}
+    body{flex-direction: column;}
+    .errors_box {font-size: 25px;}
+    #box_registration {padding: 5% 7% 5% 6%;}
+    form {width: 550px; font-size: 30px;}
+    input {font-size: 35px; width: 40%;}
+    form div > *{margin-bottom: 5%;}
+    input::placeholder {font-size: 30px;}
+    #img_wrapper {left: 40%; margin: 5%;}
+    form > div {margin: 5%;}
+  }

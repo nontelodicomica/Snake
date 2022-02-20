@@ -1,6 +1,7 @@
 <?php
     session_start();
-    include './connection.php';
+    include './searchinDB.php';
+
     $db_connection = connectionToDatabase();
     $score = $_POST['score'];
     $sql = 'INSERT INTO partite(username,score) VALUES (?,?)';

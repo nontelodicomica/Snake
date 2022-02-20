@@ -16,13 +16,13 @@
 <body>
     <div id='thanks'>
         <h2>
-            <?php echo 'Thanks for playing '.$_SESSION['username'].'!'?>
+            <?php echo 'Grazie per aver giocato '.$_SESSION['username'].'!'?>
         </h2>
         <?php 
             $check = searchIfExists('recensioni');
             if($_SESSION['firsttime'] == true || !$check) { ?>
             <h3>
-                <?php echo 'Rate the game before exiting please!' ?>
+                <?php echo 'Recensisci il gioco prima di uscire grazie!' ?>
             </h3>
                 <div id='boxstars'>
                     <div id='1' onmouseover='blurstars(event)' onclick='select(event)'></div>
@@ -32,7 +32,7 @@
                     <div id='5' onmouseover='blurstars(event)' onclick='select(event)'></div>
                 </div>
         <?php } else ?>
-            <h3> Press to confirm</h3>
+            <h3>Premi per confermare </h3>
     <input id='exit' name='exit' value='EXIT' class='button' onclick='insertRating()' readonly/>
 </body>
 

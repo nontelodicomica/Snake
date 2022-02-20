@@ -3,7 +3,7 @@ class Snake {
         this.body = new Array();
         this.inversione = 0;
         this.indexelemcovered = 1;
-        this.speed = setInterval(this.incSpeed, 20000);
+        this.speed = 100;
         this.color = this.getColor();
     }
 
@@ -28,15 +28,6 @@ class Snake {
         this.body.push(new Snake_Element(id, position));
     }
 
-    incSpeed() {
-        if (this.speed >= 30)
-            --this.speed;
-        else {
-            clearInterval(this.speed);
-            this.speed = 100;
-        }
-    }
-
     drawSnake() {
         let image, rotation;
 
@@ -44,21 +35,21 @@ class Snake {
             let previous = this.body[i.position - 1];
 
             if (i.position == 0)
-                image = "head";
+                image = 'head';
             else if (i.position == this.body.length - 1)
-                image = "tail";
+                image = 'tail';
             else{
                 if(i.inc != previous.inc)
-                    image = "bodycurvo";
+                    image = 'bodycurvo';
                 else
-                    image = "body";
+                    image = 'body';
             }
 
             if (i.position > 0 && i.inc != previous.inc)
                 rotation = i.changerotation(previous, this.giveLength());
             else
                 rotation = i.checkstartrotation();
-            document.getElementById(i.id).style.backgroundImage = "url(\"./img/Graphics/" + this.color + "/"+ image + this.color + ".png\")";
+            document.getElementById(i.id).style.backgroundImage = 'url(\'./img/Graphics/' + this.color + '/'+ image + this.color + '.png\')';
             document.getElementById(i.id).className = rotation;
         }
     }
@@ -78,7 +69,7 @@ class Snake {
     }
 
     getColor() {
-        let colorarray = ["orange", "purple", "yellow", "black", "blue"];
+        let colorarray = ['orange', 'purple', 'yellow', 'black', 'blue'];
         let index = Math.floor(Math.random() * 4);
         return colorarray[index];
     }
@@ -89,25 +80,25 @@ class Snake {
 
         for (let i of this.body) {
             if (i.id == idhead)
-                image = "head";
+                image = 'head';
             else if (this.indexelemcovered == i.id)
-                image = "tail";
+                image = 'tail';
             else
-                image = "body";
+                image = 'body';
 
             this.indexelemcovered = (this.indexelemcovered + 1) % this.body.length;
             rotation = i.checkstartrotation();
             document.getElementById(i.id).className = rotation;
-            document.getElementById(i.id).style.backgroundImage = "url(\"./img/Graphics/" + this.color + "/" + image + this.color + ".png\")";
+            document.getElementById(i.id).style.backgroundImage = 'url(\'./img/Graphics/' + this.color + '/' + image + this.color + '.png\')';
         }
 
-        if (this.checkendinversion()){
+        if (this.checkendChangeDirection()){
             this.inversione = 0;
-            document.getElementById(this.giveTail().id).style.backgroundImage = "url(\"./img/Graphics/" + this.color + "/tail" + this.color + ".png\")";
+            document.getElementById(this.giveTail().id).style.backgroundImage = 'url(\'./img/Graphics/' + this.color + '/tail' + this.color + '.png\')';
         }
     }
 
-    checkendinversion() {
+    checkendChangeDirection() {
         let tail = this.giveTail();
         let head = this.giveHead();
 
