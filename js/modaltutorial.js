@@ -57,12 +57,15 @@ class ModalTutorial{
                     text.innerText = 'Clicca sul campo da gioco per iniziare';
                     break;
             case 1: text.innerText = 'Per cambiare la direzione del serpente è sufficiente premere le frecce della tastiera! ';
-                    text.innerText += 'E\' consentita l\'inversione del senso di marcia';
+                    text.innerText += 'E\' consentita l\'inversione del senso di marcia nel caso in cui ogni elemento del serpente ';
+                    text.innerText += 'abbia stesso orientamento';
                     break;
             case 2: text.innerText = 'Lo score viene incrementato o decrementato ';
                     text.innerText += 'a seconda dell\'elemento di cui si nutre il serpente';
                     break;
-            case 3: text.innerText = 'Se il serpente tocca il bordo del campo da gioco il giocatore perde';
+            case 3: text.innerText = 'Se il serpente tocca il bordo del campo da gioco ';
+                    text.innerText += 'o è composto solo da testa e coda o si automangia ';
+                    text.innerText += 'il giocatore perde! ';
                     break;
             case 4: text.innerText = 'E\' possibile visualizzare il punteggio attuale ';
                     text.innerText += 'e il migliore punteggio conseguito qui';

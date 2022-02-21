@@ -91,11 +91,6 @@ class Snake {
             document.getElementById(i.id).className = rotation;
             document.getElementById(i.id).style.backgroundImage = 'url(\'./img/Graphics/' + this.color + '/' + image + this.color + '.png\')';
         }
-
-        if (this.checkendChangeDirection()){
-            this.inversione = 0;
-            document.getElementById(this.giveTail().id).style.backgroundImage = 'url(\'./img/Graphics/' + this.color + '/tail' + this.color + '.png\')';
-        }
     }
 
     checkendChangeDirection() {

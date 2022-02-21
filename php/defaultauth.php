@@ -4,20 +4,20 @@ include './searchinDB.php';
 
 function checkEmail($type){
     global $str_error;
-    $check = checkIfIsTheSame(0,$type);
+    $check = checkIfIsTheSame(0);
 
     if(checkIfEmpty('email'))
         return '';
     else if(!filter_var($_POST['email'],FILTER_VALIDATE_EMAIL)){
         $str_error.= 'Email del formato non valido;';  
         return '';
-    }else if($check == false && $type == 'registration')
+    }else if($check && $type == 'registration')
         return '';
 
     return $_POST['email'];
 }
 
-function checkIfIsTheSame($cod, $type){
+function checkIfIsTheSame($cod){
     global $str_error;
 
         if ($cod == 1)
@@ -26,17 +26,20 @@ function checkIfIsTheSame($cod, $type){
             $attribute = 'email';
     
     $db_connection = connectionToDatabase();
-    $sql = 'SELECT * FROM login WHERE '.$attribute.' = ?';
+    $sql = 'SELECT * FROM account WHERE '.$attribute.' = ?';
     $statement = mysqli_prepare($db_connection,$sql);
     $statement -> bind_param('s',$_POST[$attribute]);
     $statement -> execute();
     $found = $statement->get_result();
     if($found -> num_rows > 0){
-        if($type == 'registration')
-            $str_error .= 'E\'già presente un utente registrato con tale '.$attribute.';';
-        return false;
-    }
-    return true;
+        while($row = $found -> fetch_assoc()){
+            if($row[$attribute] == $_POST[$attribute]){
+                $str_error .= 'E\'già presente un utente registrato con tale '.$attribute.';';
+                return true;
+                }
+            }
+        }
+    return false;
 }
 
 function checkPassword($attribute){
@@ -78,14 +81,14 @@ function checkUsername($type){
         return '';
 
     if($type == 'login'){
-        if(!searchIfExists('login')){
+        if(!searchIfExists('account')){
             $str_error.= 'L\'utente inserito non è presente nel DB;';
             return '';
         }
     }
 
-    if($type=='registration'){
-        if(!checkIfIsTheSame(1,$type))
+    if($type == 'registration'){
+        if(checkIfIsTheSame(1))
             return '';
     }
 
@@ -113,7 +116,7 @@ function checkcolor(){
     if($str_error === '')
         return 'green';
     else if($str_error == 'start')
-        return '';
+        return 'white';
     else
         return 'red';
     }
@@ -122,7 +125,7 @@ function createBody($type){
     global $str_error;
 ?>
 
-<img id='imagebody' src= '<?php echo '../img/background'.$type.'.jpg';?>'/>
+<img id='imagebody' alt='BackgroundForm' src= '<?php echo '../img/background'.$type.'.jpg';?>'/>
     <div id='box_wrapper'>
         <div id='box_registration'>
             <div id='img_wrapper'></div>
@@ -134,7 +137,7 @@ function createBody($type){
             echo '\'../game.php\''; 
         else
             echo '\'./'.$type.'form.php\' method=\'post\''; ?> >
-<div id='errors_box' class='errors_box' style='background-color: <?php echo checkcolor(); ?>;'>
+<div id='errors_box' class='errors_box' style= 'background-color:<?php echo checkcolor(); ?>'>
 <?php 
     if($setValues == '' && $str_error != 'start'){
         $_SESSION['loggedin'] = true;

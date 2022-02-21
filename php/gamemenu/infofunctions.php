@@ -11,7 +11,7 @@
 
     function checkIfIsOld(){
         global $str_error;
-        $passwordfound = Search('password');
+        $passwordfound = Search('password','account','check');
             if(!password_verify($_POST['oldpassword'],$passwordfound)){
                 $str_error.= 'La password attuale inserita non è corretta;';
                 return '';
@@ -20,7 +20,7 @@
     }
 
     function changePassword(){
-        $sql = 'UPDATE login SET password = ? WHERE username = ?';
+        $sql = 'UPDATE account SET password = ? WHERE username = ?';
         $db_connection = connectionToDatabase();
         $statement = mysqli_prepare($db_connection,$sql);
         $newpassword = password_hash($_POST['newpassword'],PASSWORD_BCRYPT);
@@ -36,7 +36,7 @@
             <label>Username</label>
             <input type='text' value = '<?php echo $_SESSION['username'] ?>' readonly>
             <label>Indirizzo e-mail</label>
-            <input type='text' value = '<?php echo Search('email'); ?> ' readonly>
+            <input type='text' value = '<?php echo Search('email','account','check'); ?> ' readonly>
             <label>Reimposta la password</label>
 
             <div id='resultchange' class="errors_box">

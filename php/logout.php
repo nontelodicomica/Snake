@@ -9,9 +9,10 @@
         header('Location: ./loginform.php');
 ?>
     <head>
-        <link rel='stylesheet' href='../css/logout.css?ts=<?=time()?>' media='screen' type='text/css'>
-        <link rel='stylesheet' href='../css/default.css?ts=<?=time()?>' media='screen' type='text/css'>
+        <link rel='stylesheet' href='../css/logout.css' media='screen' type='text/css'>
+        <link rel='stylesheet' href='../css/default.css' media='screen' type='text/css'>
         <script type='text/javascript' src='../js/endgame.js'></script>
+        <title>Goodbye!</title>
     </head>
 <body>
     <div id='thanks'>
@@ -19,7 +20,7 @@
             <?php echo 'Grazie per aver giocato '.$_SESSION['username'].'!'?>
         </h2>
         <?php 
-            $check = searchIfExists('recensioni');
+            $check = searchIfExists('recensioni','check');
             if($_SESSION['firsttime'] == true || !$check) { ?>
             <h3>
                 <?php echo 'Recensisci il gioco prima di uscire grazie!' ?>

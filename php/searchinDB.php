@@ -2,59 +2,41 @@
     session_start();
 
     function connectionToDatabase(){
-        $db_connection = mysqli_connect('localhost','root','','account');
+        $db_connection = mysqli_connect('localhost','root','','603551');
             if(mysqli_connect_errno())
                 echo '<script>alert("Connessione con il DB non riuscita! Errore"'.mysqli_connect_error().'")</script>';
             else
         return $db_connection;
     }
 
-    function Search($parameter){
+    function Search($parameter, $table, $type){
         $db_connection = connectionToDatabase();
-        $sql = 'SELECT '.$parameter.' FROM login WHERE username = ?';
-
-        $statement = mysqli_prepare($db_connection,$sql);
-        $statement->bind_param('s',$_SESSION['username']);
-        $statement->execute();
-        
-        if($parameter !== 'email'){
-            $password_found = $statement->get_result();
-                if($password_found != null)
-                    $row = $password_found->fetch_assoc();
-                    return $row['password'];
-        }else{
-            $result = $statement -> get_result();
-            while($row = $result -> fetch_assoc()){
-                return $row['email'];
-            }
-                return null;
-
-        }
-    }
-
-    function searchIfExists($table){
-        $db = connectionToDatabase();
         $sql = 'SELECT * FROM '.$table.' WHERE username = ?';
-        $statement = mysqli_prepare($db,$sql);
-        
-        if($table == 'login')
+        $statement = mysqli_prepare($db_connection,$sql);
+
+        if($type == 'login')
             $elem = $_POST['username'];
         else
             $elem = $_SESSION['username'];
 
-        $statement -> bind_param('s', $elem);
-        $statement-> execute();
-        $result = $statement-> get_result();
-            if($result->num_rows > 0){
-                return true;
+        $statement->bind_param('s',$elem);
+        $statement->execute();
+        $result = $statement -> get_result();
+
+            while($row = $result -> fetch_assoc()){
+                if($elem === $row['username'])
+                    return $row[$parameter];
             }
-        return false;
+        }
+
+    function searchIfExists($table,$type){
+        if(empty(Search('username',$table,$type)))
+            return false;
+        return true;
     }
 
     function searchBestScore(){
-        $db_connection = mysqli_connect('localhost','root','','account');
-            if(mysqli_connect_errno())
-                echo '<script>alert("Connessione con il DB non riuscita! Errore"'.mysqli_connect_error().'")</script>';
+        $db_connection = connectionToDatabase();
         $sql = 'SELECT MAX(score) AS max FROM partite WHERE username = ?';
             $statement = mysqli_prepare($db_connection,$sql);
             $statement -> bind_param('s', $_SESSION['username']);

@@ -51,6 +51,7 @@
 }
 
 #menu a{
+  height: 50px;
   color: white;
   top: -20%;
   cursor: pointer;
@@ -59,10 +60,80 @@
   position: relative;
 }
 
+#multiplechoices{
+  width: 100%;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  background-color: crimson;
+  position: relative;
+}
+
+.changepassword{
+  font-weight: bolder;
+  margin-top: 3%;
+}
+
+a{
+  width: 100%;
+  margin-top: 10%;
+  margin-bottom: 10%;
+  color: white;
+  text-align: left;
+  display: inline;
+  cursor: pointer;
+  position: relative;
+}
+
+.choices:hover {
+  background-color: #ffffff;
+  color: #0097ee;
+  padding: 24px 10px;
+}
+
+.choices {
+  transition: 0.3s;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 0 10px;
+  margin: 0 10px;
+  top: 35%;
+  text-decoration: none;
+}
+
+h3{
+    margin: 0px;
+}
+
+#menucontainer {
+  background-color: white;
+  border: solid 2px black;
+  position: fixed;
+}
+
+#backgroundmenu, #blurredeffect{
+  width: 100vw;
+  height: 100vh;
+  top: -2px;
+  left: -2px;
+  position: fixed;
+}
+
+#blurredeffect{
+  opacity: 0.5;
+  background-color: black;
+}
+
+#backgroundmenu{
+  background-size: cover; 
+  background-repeat: no-repeat;
+}
+
 @media only screen and (orientation: portrait){
   #menucontainer {font-size: 23px; width: 90%;}
+  #backgroundmenu{background-image: url(../../img/playgroundr.png); }
 }
 
 @media only screen and (orientation: landscape){
   #menucontainer {font-size: 23px; top: 0px;}
+  #backgroundmenu{background-image: url(../../img/playgroundl.png);}
 }

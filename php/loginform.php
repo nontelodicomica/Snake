@@ -2,6 +2,7 @@
     <head>
         <link rel='stylesheet' href='../css/default.css' media='screen' type='text/css'>
         <link rel='stylesheet' href='../css/defaultform.css' media='screen' type='text/css'>
+        <title>Login!</title>
     </head>
 <body class='body_afterstart'>
     <?php
@@ -19,9 +20,9 @@
                 $str_error = '';
                 checkPassword('password');
                 checkUsername('login');
-                if(!Search('password'))
-                    $str_error.= 'Password e/o username incorretti!;';
-        }
+                if(!password_verify($_POST['password'], Search('password','account','login')))
+                    $str_error.= 'Password o username non corretti!; ';
+            }
 
             createBody('login'); 
     ?>

@@ -2,6 +2,7 @@
     <head>
         <link rel='stylesheet' href='../css/default.css' media='screen' type='text/css'>
         <link rel='stylesheet' href='../css/defaultform.css' media='screen' type='text/css'>
+        <title>Register now!</title>
     </head>
 <?php 
     session_start();
@@ -18,10 +19,12 @@
 
     function insertNewUser(){
         $db_connection = connectionToDatabase();
-        $sql = 'INSERT INTO login (email,password,username) VALUES (?,?,?)';
+        $sql = 'INSERT INTO account (`username`,`password`,`email`) VALUES (?,?,?)';
         $statement = mysqli_prepare($db_connection,$sql);
-        $hash = password_hash($_POST['password'], PASSWORD_BCRYPT);
-        $statement -> bind_param('sss',$_POST['email'],$hash,$_POST['username']);
+        $hash = password_hash($_POST['password'],PASSWORD_BCRYPT);
+        $username = $_POST['username'];
+        $email = $_POST['email'];
+        $statement -> bind_param('sss', $username ,$hash, $email);
         $statement -> execute();
     }
 ?>

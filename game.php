@@ -4,24 +4,33 @@
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, height=device-height, initial-scale=1.0'>
     <link rel='shortcut icon' href='./img/welcomeicon.ico'>
-    <link rel='stylesheet' href='./css/game.css?ts=<?=time()?>' media='screen' type='text/css'>
-    <link rel='stylesheet' href='./css/boxes.css?ts=<?=time()?>' media='screen' type='text/css'>
-    <link rel='stylesheet' href='./css/modaltutorial.css?ts=<?=time()?>' media='screen' type='text/css'>
-    <link rel='stylesheet' href='./css/default.css?ts=<?=time()?>' media='screen' type='text/css'>
-    <link rel='stylesheet' href='./css/modalendgame.css?ts=<?=time()?>' media='screen' type='text/css'>
-    <link rel='stylesheet' href='./css/menu/menu.css?ts=<?=time()?>' media='screen' type='text/css'>
-    <script type='text/javascript' src='./js/intervals.js'></script>
-    <script type='text/javascript' src='./js/snakeelement.js'></script>
-    <script type='text/javascript' src='./js/snake.js'></script>
-    <script type='text/javascript' src='./js/otherelements.js'></script>
-    <script type='text/javascript' src='./js/modaltutorial.js'></script>
-    <script type='text/javascript' src='./js/game.js'></script>
-    <script type='text/javascript' src='./js/score.js'></script>
-    <script type='text/javascript' src='./js/start.php'></script>
-    <script type='text/javascript' src='./js/menu.js'></script>
-    <script type='text/javascript' src='https://code.jquery.com/jquery-3.4.0.min.js'></script>
+    <link rel='stylesheet' href='./css/game.css' media='screen' type='text/css'>
+    <link rel='stylesheet' href='./css/boxes.css' media='screen' type='text/css'>
+    <link rel='stylesheet' href='./css/modaltutorial.css' media='screen' type='text/css'>
+    <link rel='stylesheet' href='./css/default.css' media='screen' type='text/css'>
+    <link rel='stylesheet' href='./css/modalendgame.css' media='screen' type='text/css'>
+    <link rel='stylesheet' href='./css/menu/menu.css' media='screen' type='text/css'>
+    <script src='./js/intervals.js'></script>
+    <script src='./js/snakeelement.js'></script>
+    <script src='./js/snake.js'></script>
+    <script src='./js/otherelements.js'></script>
+    <script src='./js/modaltutorial.js'></script>
+    <script src='./js/game.js'></script>
+    <script src='./js/score.js'></script>
+    <script src='./js/start.php'></script>
+    <script src='./js/menu.js'></script>
+    <script src='https://code.jquery.com/jquery-3.4.0.min.js'></script>
     <title>Welcome to Snake</title>
 </head>
+<script>
+    function goToLogout(){
+        location.replace('./php/logout.php');
+    }
+
+    function goToGame(){
+        location.replace('./game.php');
+    }
+</script>
 
 <body onload='begin()'>
 <?php
@@ -45,7 +54,7 @@ if($_SESSION['loggedin'] == true){ ?>
                     <a onclick= 'youlose()'>Exit</a>
                 <?php } else {?>
                     <a href = './php/gamemenu/menu.php'> Account </a>
-                    <a onclick='location.replace("./php/logout.php")'> Logout </a>
+                    <a id = 'logoutA' onclick="goToLogout()"> Logout </a>
                 <?php } ?>
             </ul>
         </div>
@@ -96,8 +105,8 @@ if($_SESSION['loggedin'] == true){ ?>
     <div id='endgamemodal' class='endgamemodal'>
             <h4 id='score'></h4>
             <div id='endgamebuttons'>
-                <button id='playagain' class='greenbutton' onclick='location.replace("./game.php")'>RIGIOCA</button>
-                <button id='exit' class='redbutton'>ESCI</button>
+                <button id='playagain' class='greenbutton' onclick=goToGame()>RIGIOCA</button>
+                <button id='exit' class='redbutton' onclick=goToLogout()>ESCI</button>
             </div>
     </div>
 </body>

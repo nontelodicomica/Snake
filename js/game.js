@@ -1,5 +1,3 @@
-var BEGINNINGTIMESTAMP;
-
 class Game{
     constructor() {
         this.event = new Array();
@@ -29,6 +27,7 @@ class Game{
             let boximage = document.getElementById(colors[i].id);
             let img = document.createElement('img');
             img.src = './img/Graphics/Choices/' + boximage.id + '.png';
+            img.alt = 'Image content'.i;
             img.id = boximage.id;
             boximage.id = boximage.id+'box';
             boximage.appendChild(img);
@@ -45,7 +44,6 @@ class Game{
             id = this.snake.generateNewIdForInsert();
         }
         this.snake.drawSnake();
-        BEGINNINGTIMESTAMP = Date.now();
         this.setIntervals();
     }
 
@@ -61,7 +59,7 @@ class Game{
         this.intervals.push(new Timing(this.intervals.length, setInterval(this.addborder.bind(this), 6000), 6000));
         this.intervals.push(new Timing(this.intervals.length, setInterval(this.addFoodOrBomb.bind(this), 2000), 2000));
         this.intervals.push(new Timing(this.intervals.length, setInterval(this.incSpeedSnake.bind(this), 30000), 30000));
-        this.intervals.push(new Timing(this.intervals.length, setInterval(this.movesnake.bind(this), this.snake.speed), 100));
+        this.intervals.push(new Timing(this.intervals.length, setInterval(this.movesnake.bind(this),this.snake.speed), 100));
     }
 
     incSpeedSnake() {
@@ -72,7 +70,7 @@ class Game{
 
         this.intervals[3].clearInt();
         this.intervals[3].value = this.snake.speed;
-        this.intervals[3].int = setInterval(this.movesnake.bind(this),this.snake.speed);
+        this.intervals[3].int = setInterval(this.movesnake.bind(this), this.snake.speed);
     }
 
     movesnake(){
@@ -83,6 +81,7 @@ class Game{
             let current = this.snake.giveElem(i);
             let previous = this.snake.giveElem(i - 1);
 
+            //classname specifica la rotazione dell'elemento nel div
             document.getElementById(current.id).className = '';
             current.inc = previous.inc;
             current.sign = previous.sign;
@@ -99,26 +98,38 @@ class Game{
         else
             this.snake.drawSnake();
 
-            if(this.checkIfHeHasEaten()){
-                this.endgame();
-                youlose();
-            }
-
-        if (document.getElementById('backgroundgame').className == 'withborder') {
-            if (this.checkifloose())
-                return;
+        if(this.checkIfHeEatHimself()){
+            youlose();
+            this.endgame();
+            document.getElementById(this.snake.giveHead().id).style.backgroundImage = 'url("./img/Graphics/'+this.snake.color+'/head'+this.snake.color+'.png")';
+            return;
         }
+
+        if (this.snake.checkendChangeDirection()){
+            this.snake.inversione = 0;
+            document.getElementById(this.snake.giveTail().id).style.backgroundImage = 'url(\'./img/Graphics/' + this.snake.color + '/tail' + this.snake.color + '.png\')';
+        }
+
+        if (this.checkifloose())
+        return;
+
         this.checkifeat();
     }
 
-    checkIfHeHasEaten(){
-        let newheadposition = document.getElementById(this.snake.giveHead().id);
-        if(newheadposition.style.backgroundImage !== '' && newheadposition.style.backgroundImage){
-            if(this.inversione == 0)
-                return true;
+    checkIfHeEatHimself(){
+        let head = this.snake.giveHead();
+        if(this.snake.inversione == 0){
+        for(let i = 1; i < this.snake.giveLength(); i++){
+                let elem = this.snake.giveElem(i);
+                if(head.id == elem.id){
+                    if(head.inc != elem.inc)
+                        return true;
+                }
+            }
         }
         return false;
     }
+
 
     addborder() {
         document.getElementById('backgroundgame').removeAttribute('class','noborder');
@@ -239,7 +250,7 @@ class Game{
             this.sign = 1;
         }
 
-        if (this.snake.giveHead().sign != this.sign && this.inc == this.snake.giveHead().inc)
+        if (this.snake.giveHead().sign != this.sign && this.snake.giveHead().inc == this.inc)
             this.snake.inversione = 1;
     }
 
@@ -253,7 +264,6 @@ class Game{
 
     clearSnakeMovement(){
         this.intervals[3].clearInt();
-        console.log('ok'+this.snake.speed);
         this.intervals[3].int = setInterval(this.movesnake.bind(this), this.snake.speed);
         this.timeout.pop();
     }
@@ -271,6 +281,7 @@ class Game{
     }
 
     checkIfTouchBorder() {
+    if(document.getElementById('backgroundgame').className == 'withborder'){
         for(let i of this.snake.body){
             let indexnext = this.snake.body.indexOf(i) + 1;
             let next = this.snake.body[indexnext];
@@ -285,6 +296,7 @@ class Game{
                         return true;
                 }
             }
-            return false;
         }
+            return false;
+    }
 }
