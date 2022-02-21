@@ -8,6 +8,7 @@
     <?php
         session_start();
         $_SESSION['test'] = false;
+        $_SESSION['username'] = false;
         $_SESSION['firsttime'] = false;
         $_SESSION['loggedin'] = false;
         
@@ -20,7 +21,8 @@
                 $str_error = '';
                 checkPassword('password');
                 checkUsername('login');
-                if(!password_verify($_POST['password'],Search('password','account','login')))
+                $check = Search('password','account','login');
+                if(!password_verify($_POST['password'],$check))
                     $str_error.= 'Password o username non corretti!; ';
             }
 

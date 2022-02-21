@@ -20,11 +20,12 @@
     }
 
     function changePassword(){
-        $sql = 'UPDATE account SET password = ? WHERE username = ?';
+        $id = Search('id','account','check');
+        $sql = 'UPDATE account SET password = ? WHERE id = ?';
         $db_connection = connectionToDatabase();
         $statement = mysqli_prepare($db_connection,$sql);
         $newpassword = password_hash($_POST['newpassword'],PASSWORD_BCRYPT);
-        $statement -> bind_param('ss', $newpassword, $_SESSION['username']);
+        $statement -> bind_param('ss', $newpassword, $id);
         $statement -> execute();
     }
 

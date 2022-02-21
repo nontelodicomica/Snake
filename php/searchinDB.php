@@ -24,7 +24,7 @@
         $result = $statement -> get_result();
 
             while($row = $result -> fetch_assoc()){
-                if($elem == $row['username'])
+                if($elem === $row['username'])
                     return $row[$parameter];
             }
         }
