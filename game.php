@@ -99,15 +99,15 @@ if($_SESSION['loggedin'] == true){ ?>
         <?php } ?>
         </div>
 
-    <?php } else 
-            header('Location: ./php/loginform.php');?>
-
-    <div id='endgamemodal' class='endgamemodal'>
+        <div id='endgamemodal' class='endgamemodal'>
             <h4 id='score'></h4>
             <div id='endgamebuttons'>
                 <button id='playagain' class='greenbutton' onclick=goToGame()>RIGIOCA</button>
                 <button id='exit' class='redbutton' onclick=goToLogout()>ESCI</button>
             </div>
-    </div>
+        </div>
+
+    <?php } else 
+            header('Location: ./php/loginform.php');?>
 </body>
 </html>

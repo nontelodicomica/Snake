@@ -107,7 +107,7 @@ h3{
 #menucontainer {
   background-color: white;
   border: solid 2px black;
-  position: fixed;
+  position: relative;
 }
 
 #backgroundmenu, #blurredeffect{
@@ -129,7 +129,7 @@ h3{
 }
 
 @media only screen and (orientation: portrait){
-  #menucontainer {font-size: 23px; width: 90%;}
+  #menucontainer {font-size: 23px;}
   #backgroundmenu{background-image: url(../../img/playgroundr.png); }
 }
 

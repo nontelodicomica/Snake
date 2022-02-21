@@ -81,7 +81,7 @@ function checkUsername($type){
         return '';
 
     if($type == 'login'){
-        if(!searchIfExists('account')){
+        if(!searchIfExists('account',$type)){
             $str_error.= 'L\'utente inserito non è presente nel DB;';
             return '';
         }

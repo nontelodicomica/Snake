@@ -20,7 +20,7 @@
                 $str_error = '';
                 checkPassword('password');
                 checkUsername('login');
-                if(!password_verify($_POST['password'], Search('password','account','login')))
+                if(!password_verify($_POST['password'],Search('password','account','login')))
                     $str_error.= 'Password o username non corretti!; ';
             }
 

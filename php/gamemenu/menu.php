@@ -3,7 +3,6 @@
     include './infofunctions.php';
     include './testfunctions.php';
     include './matchesfunctions.php';
-
     $_SESSION['firsttime'] = false;
     $_SESSION['test'] = false;
 ?>
@@ -37,30 +36,35 @@
 
     </script>
     <body>
-        <div id='backgroundmenu'></div>
-            <div id='blurredeffect'></div>
-            <div id='menucontainer'>
-                
-                <nav id='multiplechoices'>
-                    <a class='choices' onclick= goInfo()>Profilo</a>
-                    <a class='choices' onclick= goMatches()>Partite</a>
-                    <a class='choices' onclick= goTest()>Campo di prova</a>
-                    <a class='choices'onclick= goGame()>Torna al gioco</a>
-                </nav>
+        <?php if($_SESSION['loggedin'] == true){?>
+            <div id='backgroundmenu'></div>
+                <div id='blurredeffect'></div>
+                <div id='menucontainer'>
+                    
+                    <nav id='multiplechoices'>
+                        <a class='choices' onclick= goInfo()>Profilo</a>
+                        <a class='choices' onclick= goMatches()>Partite</a>
+                        <a class='choices' onclick= goTest()>Campo di prova</a>
+                        <a class='choices'onclick= goGame()>Torna al gioco</a>
+                    </nav>
 
-                <div id='contentaccountpages'>
-                <?php
-                    $case = $_GET['show'];
-                        switch($case){
-                        case 'info': printInfo();
-                                    break;
-                        case 'test': showTest();
-                                    break;
-                        case 'matches': showScoresMatches ();
+                    <div id='contentaccountpages'>
+                    <?php
+                        $case = $_GET['show'];
+                            switch($case){
+                            case 'info': printInfo();
                                         break;
-                        }
-                    ?>
+                            case 'test': showTest();
+                                        break;
+                            case 'matches': showScoresMatches ();
+                                            break;
+                            }
+                        ?>
+                    </div>
                 </div>
-            </div>
+            <?php } else
+                header('Location: ../loginform.php');
+            ?>
+
     </body>
 </html>
