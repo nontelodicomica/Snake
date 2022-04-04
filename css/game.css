@@ -4,14 +4,11 @@ body{
 
 #backgroundgame{
     cursor: pointer;
-    margin: 0px 5px 0px 5px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     background-color: rgb(140, 209, 37);
     align-content: center;
-    width: 98vmin;
-    height: 98vmin;
     position: relative;
 }
 
@@ -56,21 +53,9 @@ body{
 }
 
 @media only screen and (orientation: landscape){
-    #backgroundgame {top: -7px; left: 10%;}
+    #backgroundgame {top: -15px; left: 8%; width: 50vmax; height: 50vmax;}
 }
 
-@media only screen and (orientation: portrait) and (max-width: 430px) and (min-width:375px) {
-    #backgroundgame {left: -10px; width: 95vmin; height: 95vmin;}
-}
-
-@media only screen and (orientation: portrait) and (max-width: 756px) {
-    #backgroundgame {left: -10px; width: 70vmin; height:70vmin;}
-}
-
-@media only screen and (orientation: landscape) and (max-width: 708px) and (min-width:405px) {
-    #backgroundgame {width: 70vmin; height: 70vmin; top: 30%; transform: translateY(-50%);}
-}
-
-@media only screen and (orientation: landscape) and (min-width:708px) and (max-width: 768px){
-    #backgroundgame { left: 7%; top: -10%; width: 80vmin; height: 80vmin;}
+@media  (orientation:portrait) {
+    #backgroundgame {margin: -20px 5px 0px -11px; width: 90vmin; height: 90vmin;}
 }

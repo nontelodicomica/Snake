@@ -37,14 +37,18 @@
 
     function searchBestScore(){
         $db_connection = connectionToDatabase();
-        $sql = 'SELECT MAX(score) AS max FROM partite WHERE username = ?';
+        $sql = 'SELECT username, score FROM partite WHERE username = ?';
             $statement = mysqli_prepare($db_connection,$sql);
             $statement -> bind_param('s', $_SESSION['username']);
             $statement-> execute();
         $result = $statement-> get_result();
-        $row = $result->fetch_assoc();
-        if($row['max'] != null)
-            return $row['max'];
-    return '0';
+        $max = '0';
+            while($row = $result -> fetch_assoc()){
+                if( $row['username']=== $_SESSION['username']){
+                    if($row['score'] > $max)
+                     $max = $row['score'];
+                }
+            }
+    return $max;
     }
 ?>

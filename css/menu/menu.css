@@ -69,6 +69,7 @@
 }
 
 .changepassword{
+  font-size: 20px;
   font-weight: bolder;
   margin-top: 3%;
 }
@@ -105,6 +106,7 @@ h3{
 }
 
 #menucontainer {
+  font-size: 20px;
   background-color: white;
   border: solid 2px black;
   position: relative;
@@ -124,16 +126,16 @@ h3{
 }
 
 #backgroundmenu{
-  background-size: cover; 
+  background-size: cover;
   background-repeat: no-repeat;
 }
 
 @media only screen and (orientation: portrait){
-  #menucontainer {font-size: 23px;}
+  #menucontainer a{font-size: 40px;}
   #backgroundmenu{background-image: url(../../img/playgroundr.png); }
 }
 
 @media only screen and (orientation: landscape){
-  #menucontainer {font-size: 23px; top: 0px;}
+  #menucontainer {top: 0px;}
   #backgroundmenu{background-image: url(../../img/playgroundl.png);}
 }

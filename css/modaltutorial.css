@@ -88,9 +88,9 @@
 }
 
 @media only screen and (orientation: portrait){
-    #modaltutorial {width: 60%; height: 30%;}
+    #modaltutorial {width: 60vmin;}
 }
 
 @media only screen and (orientation: landscape) {
-    #modaltutorial {width: 30%; height: 60%;}
+    #modaltutorial { width: 30vmin;}
 }

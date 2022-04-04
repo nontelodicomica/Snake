@@ -10,7 +10,6 @@ class Snake_Element {
         if (this.inc == 1) {
             if (this.sign == 1)
                 return 'rotate270';
-
             else
                 return 'rotate90';
         } else {

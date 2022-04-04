@@ -19,7 +19,7 @@
 
     function insertNewUser(){
         $db_connection = connectionToDatabase();
-        $sql = 'INSERT INTO account (`username`,`password`,`email`) VALUES (?,?,?)';
+        $sql = 'INSERT INTO account (username,password,email) VALUES (?,?,?)';
         $statement = mysqli_prepare($db_connection,$sql);
         $hash = password_hash($_POST['password'],PASSWORD_BCRYPT);
         $username = $_SESSION['username'];
